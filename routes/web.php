@@ -2,6 +2,7 @@
 
 use App\Livewire\Admin\Auth\Login;
 use App\Livewire\Admin\Dashboard;
+use App\Livewire\Home;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/', Home::class)->name('home');
 
 Route::middleware(['guest:admin'])->group(function () {
     Route::get('admin/login', Login::class)->name('admin.login');
