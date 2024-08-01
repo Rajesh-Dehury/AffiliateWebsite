@@ -1,5 +1,8 @@
 <?php
 
+use App\Livewire\Admin\Auth\Login;
+use App\Livewire\Admin\Dashboard;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +18,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::middleware(['guest:admin'])->group(function () {
+    Route::get('admin/login', Login::class)->name('admin.login');
+});
+
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('admin/dashboard', Dashboard::class)->name('admin.dashboard');
+    Route::get('admin/logout', function () {
+        Auth::guard('admin')->logout();
+        return redirect()->route('admin.login');
+    })->name('admin.logout');
 });
