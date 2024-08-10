@@ -23,13 +23,7 @@
         <x-admin-side-nav />
         <div class="md:col-span-9 w-full z-0 min-h-screen">
             <x-admin-top-nav />
-            <div class="bg-white m-3 p-3 rounded-lg">
-                <div class="overflow-auto">
-                    <div class="flex flex-col">
-                        {{$slot}}
-                    </div>
-                </div>
-            </div>
+            {{$slot}}
         </div>
     </div>
 </body>
