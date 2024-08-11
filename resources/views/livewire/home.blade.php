@@ -21,8 +21,8 @@
                         <p class="font-bold text-green-600 hidden">Up to 90% off</p>
                     </div>
                     <div class="flex my-3">
-                        <a href="{{$record->our_link}}" class="bg-green-700 hover:bg-green-600 text-white w-1/2 text-center rounded-lg py-1.5 mx-1 font-bold">Details</a>
-                        <a href="{{$record->detail_page_url}}" target="_blank" class="bg-blue-500 hover:bg-blue-400 text-white w-1/2 text-center rounded-lg py-1.5 mx-1 font-bold">Check Now</a>
+                        <a href="" class="bg-green-700 hover:bg-green-600 text-white w-1/2 text-center rounded-lg py-1.5 mx-1 font-bold">Details</a>
+                        <a href="{{$record->our_link}}" target="_blank" class="bg-blue-500 hover:bg-blue-400 text-white w-1/2 text-center rounded-lg py-1.5 mx-1 font-bold">Check Now</a>
                     </div>
                 </div>
                 @empty
