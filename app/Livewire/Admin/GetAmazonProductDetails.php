@@ -23,6 +23,7 @@ class GetAmazonProductDetails extends Component
     private $uriPath = '/paapi5/getitems';
 
     // fetch data 
+    public $json;
     public $product_asin;
     public $product_asin_hash;
     public $detail_page_url;
@@ -34,6 +35,8 @@ class GetAmazonProductDetails extends Component
     public $saving_amount;
     public $features_editor;
     public $our_link;
+    public $wp_post;
+    public $our_post;
 
     public function render()
     {
@@ -151,6 +154,7 @@ class GetAmazonProductDetails extends Component
                 throw new \Exception("Error reading response.");
             }
 
+            $this->json = $response;
             $this->response = json_decode($response, true);
 
             $item = $this->response['ItemsResult']['Items'][0];
@@ -159,13 +163,49 @@ class GetAmazonProductDetails extends Component
             $this->product_asin_hash = Hash::make($this->product_asin);
             $this->our_link = route('open.az.prod', $this->product_asin);
 
-            $this->detail_page_url = $item['DetailPageURL'];
-            $this->primary_large_url = $item['Images']['Primary']['Large']['URL'];
-            $this->product_title = $item['ItemInfo']['Title']['DisplayValue'];
-            $this->mrp = $item['Offers']['Listings'][0]['SavingBasis']['DisplayAmount'];
-            $this->offer_price = $item['Offers']['Listings'][0]['Price']['DisplayAmount'];
-            $this->saving_percent = $item['Offers']['Listings'][0]['Price']['Savings']['Percentage'];
-            $this->saving_amount = $item['Offers']['Listings'][0]['Price']['Savings']['Amount'];
+            $this->detail_page_url = $item['DetailPageURL'] ?? "";
+            $this->primary_large_url = $item['Images']['Primary']['Large']['URL'] ?? "";
+            $this->product_title = $item['ItemInfo']['Title']['DisplayValue'] ?? "";
+            $this->mrp = $item['Offers']['Listings'][0]['SavingBasis']['DisplayAmount'] ?? "";
+            $this->offer_price = $item['Offers']['Listings'][0]['Price']['DisplayAmount'] ?? "";
+            $this->saving_percent = $item['Offers']['Listings'][0]['Price']['Savings']['Percentage'] ?? "";
+            $this->saving_amount = $item['Offers']['Listings'][0]['Price']['Savings']['Amount'] ?? "";
+
+            // WP Post
+            $this->wp_post = "$this->product_title";
+            if ($this->mrp != "") {
+                $this->wp_post .= "\r\n \r\n";
+                $this->wp_post .= "MRP: ~{$this->mrp}~/- ✅ Lowest Price";
+            }
+            if ($this->offer_price != "") {
+                $this->wp_post .= "\r\n \r\n";
+                $this->wp_post .= "DEAL: *{$this->offer_price}/- ";
+            }
+            if ($this->saving_percent != "") {
+                $this->wp_post .= "({$this->saving_percent}%)* 🎊";
+            }
+            $this->wp_post .= "\r\n \r\n";
+            if ($this->detail_page_url != "") {
+                $this->wp_post .= "LINK : {$this->detail_page_url}";
+            }
+
+            // Our Post
+            $this->our_post = "$this->product_title";
+            if ($this->mrp != "") {
+                $this->our_post .= "\r\n \r\n";
+                $this->our_post .= "MRP: ~{$this->mrp}~/- ✅ Lowest Price";
+            }
+            if ($this->offer_price != "") {
+                $this->our_post .= "\r\n \r\n";
+                $this->our_post .= "DEAL: *{$this->offer_price}/- ";
+            }
+            if ($this->saving_percent != "") {
+                $this->our_post .= "({$this->saving_percent}%)* 🎊";
+            }
+            $this->our_post .= "\r\n \r\n";
+            if ($this->our_link != "") {
+                $this->our_post .= "LINK : {$this->our_link}";
+            }
 
             foreach ($item['ItemInfo']['Features']['DisplayValues'] as $key => $dv) {
                 $this->features_editor .= "{$key} : {$dv}<br>\n";
@@ -223,6 +263,9 @@ class GetAmazonProductDetails extends Component
                 'saving_amount' => $this->saving_amount,
                 'features_editor' => $this->features_editor,
                 'our_link' => $this->our_link,
+                'json' => $this->json,
+                'wp_post' => $this->wp_post,
+                'our_post' => $this->our_post,
             ]
         );
     }

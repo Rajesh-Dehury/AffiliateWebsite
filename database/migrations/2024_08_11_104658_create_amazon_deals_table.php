@@ -24,6 +24,9 @@ return new class extends Migration
             $table->string('saving_amount')->nullable();
             $table->text('features_editor')->nullable();
             $table->string('our_link')->nullable();
+            $table->text('json')->nullable();
+            $table->text('wp_post')->nullable();
+            $table->text('our_post')->nullable();
             $table->timestamps();
         });
     }

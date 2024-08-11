@@ -12,7 +12,7 @@ class Home extends Component
 
     public $search = '';
     public $perPage = 5; // Default per page
-    public $sortField = 'id'; // Default sort field
+    public $sortField = 'updated_at'; // Default sort field
     public $sortDirection = 'desc'; // Default sort direction
 
     protected $queryString = ['search', 'sortField', 'sortDirection', 'perPage'];

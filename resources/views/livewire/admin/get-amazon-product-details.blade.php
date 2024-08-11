@@ -53,6 +53,30 @@
                     </form>
                 </div>
                 <div class="grid grid-cols-8 gap-2 w-full mb-3">
+                    <label for="wp_post" class="col-span-8 text-gray-700 font-medium pb-2">WP Post</label>
+                    <textarea wire:model="wp_post" id="wp_post" type="text" class="col-span-6 md:col-span-7 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly></textarea>
+                    <button @click="copyToClipboard('wp_post')" class="col-span-2 md:col-span-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
+                        <span x-show="copiedField !== 'wp_post'">Copy</span>
+                        <span x-show="copiedField === 'wp_post'" class="inline-flex items-center">
+                            <svg class="w-3 h-3 text-white me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
+                            </svg>
+                            Copied!
+                        </span>
+                    </button>
+
+                    <label for="our_post" class="col-span-8 text-gray-700 font-medium pb-2">Our Post</label>
+                    <textarea wire:model="our_post" id="our_post" type="text" class="col-span-6 md:col-span-7 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly></textarea>
+                    <button @click="copyToClipboard('our_post')" class="col-span-2 md:col-span-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
+                        <span x-show="copiedField !== 'our_post'">Copy</span>
+                        <span x-show="copiedField === 'our_post'" class="inline-flex items-center">
+                            <svg class="w-3 h-3 text-white me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
+                            </svg>
+                            Copied!
+                        </span>
+                    </button>
+
                     <label for="our_link" class="col-span-8 text-gray-700 font-medium pb-2">Our Link</label>
                     <input wire:model="our_link" id="our_link" type="text" class="col-span-6 md:col-span-7 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly>
                     <button @click="copyToClipboard('our_link')" class="col-span-2 md:col-span-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">

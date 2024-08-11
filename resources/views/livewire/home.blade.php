@@ -4,7 +4,7 @@
         <div class="col-span-12">
             <div class="grid grid-cols-12 gap-2">
                 @forelse($records as $record)
-                <div class="bg-white border p-1 col-span-4 rounded-xl">
+                <div class="bg-white border p-1 col-span-12 md:col-span-4 rounded-xl">
                     <div class="relative">
                         <p class="text-xs bg-gray-700 text-white rounded-tl-lg absolute top-0 left-0 px-2 py-1.5">{{$record->updated_at->format('F j, Y')}}</p>
                         @if($record->saving_percent)
@@ -21,7 +21,7 @@
                         <p class="font-bold text-green-600 hidden">Up to 90% off</p>
                     </div>
                     <div class="flex my-3">
-                        <a href="" class="bg-green-700 hover:bg-green-600 text-white w-1/2 text-center rounded-lg py-1.5 mx-1 font-bold">Details</a>
+                        <a wire:navigate href="{{route('details',$record->id)}}" class="bg-green-700 hover:bg-green-600 text-white w-1/2 text-center rounded-lg py-1.5 mx-1 font-bold">Details</a>
                         <a href="{{$record->our_link}}" target="_blank" class="bg-blue-500 hover:bg-blue-400 text-white w-1/2 text-center rounded-lg py-1.5 mx-1 font-bold">Check Now</a>
                     </div>
                 </div>
