@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RedirectController;
+use App\Livewire\Admin\AllPosts;
 use App\Livewire\Admin\Auth\Login;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\GetAmazonProductDetails;
@@ -36,6 +37,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/dashboard', Dashboard::class)->name('admin.dashboard');
     Route::get('admin/url-generate', UrlGenerate::class)->name('admin.url-generate');
     Route::get('admin/get-prod/az', GetAmazonProductDetails::class)->name('admin.get-prod.az');
+    Route::get('admin/all/posts', AllPosts::class)->name('admin.all.posts');
     Route::get('admin/logout', function () {
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
