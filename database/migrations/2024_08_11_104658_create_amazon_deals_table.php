@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('saving_percent')->nullable();
             $table->string('saving_amount')->nullable();
             $table->text('features_editor')->nullable();
+            $table->string('our_link')->nullable();
             $table->timestamps();
         });
     }

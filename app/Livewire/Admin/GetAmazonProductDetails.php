@@ -33,6 +33,7 @@ class GetAmazonProductDetails extends Component
     public $saving_percent;
     public $saving_amount;
     public $features_editor;
+    public $our_link;
 
     public function render()
     {
@@ -154,6 +155,10 @@ class GetAmazonProductDetails extends Component
 
             $item = $this->response['ItemsResult']['Items'][0];
             $this->product_asin = $item['ASIN'];
+
+            $this->product_asin_hash = Hash::make($this->product_asin);
+            $this->our_link = route('open.az.prod', $this->product_asin);
+
             $this->detail_page_url = $item['DetailPageURL'];
             $this->primary_large_url = $item['Images']['Primary']['Large']['URL'];
             $this->product_title = $item['ItemInfo']['Title']['DisplayValue'];
@@ -161,7 +166,6 @@ class GetAmazonProductDetails extends Component
             $this->offer_price = $item['Offers']['Listings'][0]['Price']['DisplayAmount'];
             $this->saving_percent = $item['Offers']['Listings'][0]['Price']['Savings']['Percentage'];
             $this->saving_amount = $item['Offers']['Listings'][0]['Price']['Savings']['Amount'];
-
 
             foreach ($item['ItemInfo']['Features']['DisplayValues'] as $key => $dv) {
                 $this->features_editor .= "{$key} : {$dv}<br>\n";
@@ -208,7 +212,8 @@ class GetAmazonProductDetails extends Component
         AmazonDeals::updateOrCreate(
             ['product_asin' => $this->product_asin],
             [
-                'product_asin_hash' => Hash::make($this->product_asin_hash),
+                'product_asin' => $this->product_asin,
+                'product_asin_hash' => $this->product_asin_hash,
                 'detail_page_url' => $this->detail_page_url,
                 'primary_large_url' => $this->primary_large_url,
                 'product_title' => $this->product_title,
@@ -217,6 +222,7 @@ class GetAmazonProductDetails extends Component
                 'saving_percent' => $this->saving_percent,
                 'saving_amount' => $this->saving_amount,
                 'features_editor' => $this->features_editor,
+                'our_link' => $this->our_link,
             ]
         );
     }

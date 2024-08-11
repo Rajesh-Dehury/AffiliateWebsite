@@ -33,7 +33,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/dashboard', Dashboard::class)->name('admin.dashboard');
     Route::get('admin/url-generate', UrlGenerate::class)->name('admin.url-generate');
     Route::get('admin/get-prod/az', GetAmazonProductDetails::class)->name('admin.get-prod.az');
-    Route::get('/redirect-me', [RedirectController::class, 'redirectToAnotherUrl']);
+    Route::get('/open/{product_asin}', [RedirectController::class, 'redirectToAnotherUrl'])->name('open.az.prod');
     Route::get('admin/logout', function () {
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
