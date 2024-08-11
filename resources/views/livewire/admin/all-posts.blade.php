@@ -119,7 +119,7 @@
 
                                     <!-- Action -->
                                     <td class="py-2 text-start whitespace-nowrap text-sm font-medium">
-                                        <a wire:navigate href="" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none">Details</a>
+                                        <a wire:navigate href="{{route('admin.post',$record->id)}}" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none">Details</a>
                                     </td>
 
                                     <td class="py-2 px-3 whitespace-nowrap text-sm font-medium text-gray-800">{{$record->product_asin}}</td>

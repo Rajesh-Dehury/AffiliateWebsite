@@ -5,6 +5,7 @@ use App\Livewire\Admin\AllPosts;
 use App\Livewire\Admin\Auth\Login;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\GetAmazonProductDetails;
+use App\Livewire\Admin\PostDetails as AdminPostDetails;
 use App\Livewire\Admin\UrlGenerate;
 use App\Livewire\Home;
 use App\Livewire\PostDetails;
@@ -38,6 +39,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/url-generate', UrlGenerate::class)->name('admin.url-generate');
     Route::get('admin/get-prod/az', GetAmazonProductDetails::class)->name('admin.get-prod.az');
     Route::get('admin/all/posts', AllPosts::class)->name('admin.all.posts');
+    Route::get('admin/{id}/post', AdminPostDetails::class)->name('admin.post');
     Route::get('admin/logout', function () {
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
