@@ -1,9 +1,9 @@
 <div class="p-5">
     <div class="grid grid-cols-12">
-        <div class="col-span-12 md:col-span-8 rounded-lg">
+        <div class="max-w-3xl mx-auto col-span-12 md:col-span-8 rounded-lg">
             <div class="flex justify-between">
-                <a href="{{ url()->previous() }}" class="mb-3 inline-block bg-blue-400 text-white px-3 py-1.5 rounded-lg shadow-lg hover:shadow-none">BACK</a>
-                <a href="{{ route('home') }}" class="mb-3 inline-block bg-yellow-400 text-black px-3 py-1.5 rounded-lg shadow-lg hover:shadow-none">HOME</a>
+                <a wire:navigate href="{{ url()->previous() }}" class="mb-3 inline-block bg-blue-400 text-white px-3 py-1.5 rounded-lg shadow-lg hover:shadow-none">BACK</a>
+                <a wire:navigate href="{{ route('home') }}" class="mb-3 inline-block bg-yellow-400 text-black px-3 py-1.5 rounded-lg shadow-lg hover:shadow-none">HOME</a>
             </div>
             <div class="relative bg-white rounded-lg">
                 <p class="text-xs bg-gray-700 text-white rounded-tl-lg absolute top-0 left-0 px-2 py-1.5">{{$record->updated_at->format('F j, Y')}}</p>
@@ -11,7 +11,7 @@
                 <p class="text-xs bg-red-700 text-white rounded-tr-lg absolute top-0 right-0 px-2 py-1.5">UPTO {{$record->saving_percent}} % OFF</p>
                 @endif
                 <img src="{{$record->primary_large_url}}" alt="" class="h-80 w-full rounded-lg object-contain">
-                <div class="h-40 w-full absolute bg-gradient-to-t from-gray-800 bottom-0 rounded-lg">
+                <div class="h-40 w-full bg-gradient-to-t from-gray-800 bottom-0 rounded-lg">
                     <div class="absolute bottom-2 px-3">
                         <p class="mb-1 text-white text-sl md:text-2xl">{{$record->product_title}}</p>
                     </div>
