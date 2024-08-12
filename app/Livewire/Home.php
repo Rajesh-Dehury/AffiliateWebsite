@@ -11,7 +11,7 @@ class Home extends Component
     use WithPagination;
 
     public $search = '';
-    public $perPage = 1; // Default per page
+    public $perPage = 30; // Default per page
     public $sortField = 'updated_at'; // Default sort field
     public $sortDirection = 'desc'; // Default sort direction
     public $totalRecords = 0;
