@@ -1,8 +1,5 @@
+---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/isftcpat/public_html/
-    - /bin/cp -R ~/AffiliateWebsite/public/* $DEPLOYPATH
-    - /bin/cp -R ~/AffiliateWebsite/storage/app/public/* $DEPLOYPATH/storage
-    - cd ~/AffiliateWebsite && composer install --optimize-autoloader --no-dev
-    - cd ~/AffiliateWebsite && php artisan migrate --force
-    - cd ~/AffiliateWebsite && php artisan cache:clear && php artisan config:clear
+    - export DEPLOYPATH=/isftcpat/username/public_html/
+    - /bin/cp -r * $DEPLOYPATH
