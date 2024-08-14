@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RedirectController;
+use App\Livewire\AboutUs;
 use App\Livewire\Admin\AllPosts;
 use App\Livewire\Admin\Auth\Login;
 use App\Livewire\Admin\Dashboard;
@@ -28,6 +29,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/', Home::class)->name('home');
+Route::get('/about', AboutUs::class)->name('about');
 Route::get('details/{prod_id}', PostDetails::class)->name('details');
 Route::get('/open/{product_asin}', [RedirectController::class, 'redirectToAnotherUrl'])->name('open.az.prod');
 

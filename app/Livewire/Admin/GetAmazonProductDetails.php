@@ -2,11 +2,15 @@
 
 namespace App\Livewire\Admin;
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 use App\Models\AmazonDeals;
 use App\Services\AwsV4;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Http;
 use Livewire\Component;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\BrowserKit\HttpBrowser;
 
 class GetAmazonProductDetails extends Component
@@ -128,38 +132,24 @@ class GetAmazonProductDetails extends Component
         $awsService->addHeader('x-amz-target', 'com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems');
 
         $headers = $awsService->getHeaders();
-        $headerString = "";
-        foreach ($headers as $key => $value) {
-            $headerString .= $key . ': ' . $value . "\r\n";
-        }
 
-        $params = [
-            'http' => [
-                'header' => $headerString,
-                'method' => 'POST',
-                'content' => $payload
-            ]
-        ];
-
-        $context = stream_context_create($params);
+        // Use Guzzle to make the request
+        $client = new Client([
+            'base_uri' => 'https://' . $this->host,
+            'verify' => false // Disable SSL verification, not recommended for production
+        ]);
 
         try {
-            $fp = @fopen('https://' . $this->host . $this->uriPath, 'rb', false, $context);
-            if (!$fp) {
-                throw new \Exception("Unable to connect to API.");
-            }
+            $response = $client->post($this->uriPath, [
+                'headers' => $headers, // $headers should be an associative array
+                'json' => json_decode($payload, true) // Convert payload to an array
+            ]);
 
-            $response = @stream_get_contents($fp);
-            if ($response === false) {
-                throw new \Exception("Error reading response.");
-            }
-
-            $this->json = $response;
-            $this->response = json_decode($response, true);
+            $this->json = $response->getBody()->getContents();
+            $this->response = json_decode($this->json, true);
 
             $item = $this->response['ItemsResult']['Items'][0];
             $this->product_asin = $item['ASIN'];
-
             $this->product_asin_hash = Hash::make($this->product_asin);
             $this->our_link = route('open.az.prod', $this->product_asin);
 
@@ -175,14 +165,14 @@ class GetAmazonProductDetails extends Component
             $this->wp_post = "$this->product_title";
             if ($this->mrp != "") {
                 $this->wp_post .= "\r\n \r\n";
-                $this->wp_post .= "MRP: ~{$this->mrp}~/- ✅ Lowest Price";
+                $this->wp_post .= "MRP: ~{$this->mrp}~/- âœ… Lowest Price";
             }
             if ($this->offer_price != "") {
                 $this->wp_post .= "\r\n \r\n";
                 $this->wp_post .= "DEAL: *{$this->offer_price}/- ";
             }
             if ($this->saving_percent != "") {
-                $this->wp_post .= "({$this->saving_percent}%)* 🎊";
+                $this->wp_post .= "({$this->saving_percent}%)* ðŸŽŠ";
             }
             $this->wp_post .= "\r\n \r\n";
             if ($this->detail_page_url != "") {
@@ -193,14 +183,14 @@ class GetAmazonProductDetails extends Component
             $this->our_post = "$this->product_title";
             if ($this->mrp != "") {
                 $this->our_post .= "\r\n \r\n";
-                $this->our_post .= "MRP: ~{$this->mrp}~/- ✅ Lowest Price";
+                $this->our_post .= "MRP: ~{$this->mrp}~/- âœ… Lowest Price";
             }
             if ($this->offer_price != "") {
                 $this->our_post .= "\r\n \r\n";
                 $this->our_post .= "DEAL: *{$this->offer_price}/- ";
             }
             if ($this->saving_percent != "") {
-                $this->our_post .= "({$this->saving_percent}%)* 🎊";
+                $this->our_post .= "({$this->saving_percent}%)* ðŸŽŠ";
             }
             $this->our_post .= "\r\n \r\n";
             if ($this->our_link != "") {
@@ -210,7 +200,7 @@ class GetAmazonProductDetails extends Component
             foreach ($item['ItemInfo']['Features']['DisplayValues'] as $key => $dv) {
                 $this->features_editor .= "{$key} : {$dv}<br>\n";
             }
-        } catch (\Exception $e) {
+        } catch (RequestException $e) {
             $this->response = ['error' => $e->getMessage()];
         }
     }
