@@ -9,6 +9,7 @@ use App\Livewire\Admin\GetAmazonProductDetails;
 use App\Livewire\Admin\PostDetails as AdminPostDetails;
 use App\Livewire\Admin\SettingUpdate;
 use App\Livewire\Admin\UrlGenerate;
+use App\Livewire\Disclaimer;
 use App\Livewire\Home;
 use App\Livewire\PostDetails;
 use App\Livewire\Privacy;
@@ -32,6 +33,7 @@ Route::get('/', function () {
 Route::get('/', Home::class)->name('home');
 Route::get('/about', AboutUs::class)->name('about');
 Route::get('/privacy', Privacy::class)->name('privacy');
+Route::get('/disclaimer', Disclaimer::class)->name('disclaimer');
 Route::get('details/{prod_id}', PostDetails::class)->name('details');
 Route::get('/open/{product_asin}', [RedirectController::class, 'redirectToAnotherUrl'])->name('open.az.prod');
 

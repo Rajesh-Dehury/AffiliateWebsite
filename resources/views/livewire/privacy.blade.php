@@ -1,5 +1,5 @@
 <div class="bg-gray-200 text-gray-800 font-sans leading-relaxed">
-    <div class="max-w-5xl mx-auto p-8 bg-white shadow-md rounded-lg">
+    <div class="max-w-5xl mx-auto p-8">
         <h1 class="text-5xl font-bold text-blue-600 mb-8">Privacy Policy</h1>
 
         <section class="mb-12">
