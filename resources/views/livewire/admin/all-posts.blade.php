@@ -124,7 +124,7 @@
 
                                     <td class="py-2 px-3 whitespace-nowrap text-sm font-medium text-gray-800">{{$record->product_asin}}</td>
                                     <td class="py-2 px-3 whitespace-nowrap text-sm font-medium text-gray-800">{{$record->updated_at}}</td>
-                                    <td class="py-2 px-3 whitespace-nowrap text-sm font-medium text-gray-800">{{\Str::limit($record->product_title,2000)}}</td>
+                                    <td class="py-2 px-3 whitespace-nowrap text-sm font-medium text-gray-800">{{\Str::limit($record->product_title,70)}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

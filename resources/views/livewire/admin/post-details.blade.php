@@ -2,17 +2,20 @@
     <div class="overflow-auto">
         <div class="flex flex-col">
             <div x-data="{
-    copiedField: null,
-    copyToClipboard(id) { 
-        const text = document.getElementById(id).value;
-        navigator.clipboard.writeText(text).then(() => { 
-            this.copiedField = id; 
-            setTimeout(() => { this.copiedField = null; }, 2000); 
-        }); 
-    }
-}">
+                copiedField: null,
+                copyToClipboard(id) { 
+                    const text = document.getElementById(id).value;
+                    navigator.clipboard.writeText(text).then(() => { 
+                        this.copiedField = id; 
+                        setTimeout(() => { this.copiedField = null; }, 2000); 
+                    }); 
+                }
+            }">
                 <div class="flex justify-between">
                     <a href="{{route('admin.all.posts')}}" class="mb-3 inline-block bg-blue-400 text-white px-3 py-1.5 rounded-lg shadow-lg hover:shadow-none">Back</a>
+                </div>
+                <div>
+                    <img src="{{$primary_large_url}}" alt="" class="h-32">
                 </div>
                 <div class="grid grid-cols-8 gap-2 w-full mb-3">
                     <label for="wp_post" class="col-span-8 text-gray-700 font-medium pb-2">WP Post</label>

@@ -6,7 +6,11 @@
                 @forelse($records as $record)
                 <div class="bg-white border p-1 col-span-12 md:col-span-4 rounded-xl">
                     <div class="relative">
-                        <p class="text-xs bg-gray-700 text-white rounded-tl-lg absolute top-0 left-0 px-2 py-1.5">{{$record->updated_at->format('F j, Y')}}</p>
+                        <p class="text-xs bg-gray-700 text-white rounded-tl-lg absolute top-0 left-0 px-2 py-1.5" wire:ignore>{{$record->updated_at->diffForHumans(
+    now(),
+    \Carbon\CarbonInterface::DIFF_RELATIVE_AUTO,
+    true,
+    3);}}</p>
                         @if($record->saving_percent)
                         <p class="text-xs bg-red-700 text-white rounded-tr-lg absolute top-0 right-0 px-2 py-1.5">UPTO {{$record->saving_percent}} % OFF</p>
                         @endif

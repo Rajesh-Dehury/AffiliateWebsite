@@ -44,6 +44,11 @@ class UrlGenerate extends Component
         $this->new_url = "https://www.amazon.in/dp/{$this->asin}?psc=1&th=1&tag={$this->amazon_partner_tag}";
     }
 
+    public function resetT()
+    {
+        $this->reset();
+    }
+
     public function render()
     {
         return view('livewire.admin.url-generate')->layout('components.admin-layout');
