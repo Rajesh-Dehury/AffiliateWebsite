@@ -47,6 +47,11 @@ class GetAmazonProductDetails extends Component
         return view('livewire.admin.get-amazon-product-details')->layout('components.admin-layout');
     }
 
+    public function resetT()
+    {
+        $this->reset();
+    }
+
     public function fetchProductDetails()
     {
         $awsService = new AwsV4($this->accessKey, $this->secretKey);
@@ -197,8 +202,15 @@ class GetAmazonProductDetails extends Component
                 $this->our_post .= "LINK : {$this->our_link}";
             }
 
-            foreach ($item['ItemInfo']['Features']['DisplayValues'] as $key => $dv) {
-                $this->features_editor .= "{$key} : {$dv}<br>\n";
+            $displayValues = $item['ItemInfo']['Features']['DisplayValues'] ?? null;
+
+            if ($displayValues) {
+                $this->features_editor .= "<ul>\n";
+
+                foreach ($displayValues as $key => $dv) {
+                    $this->features_editor .= "<li>{$dv}</li>\n";
+                }
+                $this->features_editor .= "</ul>\n";
             }
         } catch (RequestException $e) {
             $this->response = ['error' => $e->getMessage()];
