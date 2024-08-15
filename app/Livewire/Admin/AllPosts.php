@@ -11,7 +11,7 @@ class AllPosts extends Component
     use WithPagination;
 
     public $search = '';
-    public $perPage = 5; // Default per page
+    public $perPage = 20; // Default per page
     public $sortField = 'id'; // Default sort field
     public $sortDirection = 'desc'; // Default sort direction
 

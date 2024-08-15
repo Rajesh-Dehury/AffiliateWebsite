@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Auth;
 
 use App\Livewire\Admin\Dashboard;
+use App\Livewire\Admin\GetAmazonProductDetails;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -24,7 +25,7 @@ class Login extends Component
         if (Auth::guard('admin')->attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
             session()->flash('message', 'Login successful.');
 
-            $this->redirect(Dashboard::class);
+            $this->redirect(GetAmazonProductDetails::class);
         } else {
             session()->flash('error_message', 'The provided credentials do not match our records.');
         }

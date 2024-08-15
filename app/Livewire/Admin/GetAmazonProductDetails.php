@@ -151,11 +151,12 @@ class GetAmazonProductDetails extends Component
             ]);
 
             $this->json = $response->getBody()->getContents();
+            // dd($this->json);
             $this->response = json_decode($this->json, true);
 
             $item = $this->response['ItemsResult']['Items'][0];
             $this->product_asin = $item['ASIN'];
-            $this->product_asin_hash = Hash::make($this->product_asin);
+            $this->product_asin_hash = encrypt($this->product_asin);
             $this->our_link = route('open.az.prod', $this->product_asin);
 
             $this->detail_page_url = $item['DetailPageURL'] ?? "";
@@ -170,14 +171,14 @@ class GetAmazonProductDetails extends Component
             $this->wp_post = "$this->product_title";
             if ($this->mrp != "") {
                 $this->wp_post .= "\r\n \r\n";
-                $this->wp_post .= "MRP: ~{$this->mrp}~/- âœ… Lowest Price";
+                $this->wp_post .= "MRP: ~{$this->mrp}~/- ⬇️ Lowest Price";
             }
             if ($this->offer_price != "") {
                 $this->wp_post .= "\r\n \r\n";
                 $this->wp_post .= "DEAL: *{$this->offer_price}/- ";
             }
             if ($this->saving_percent != "") {
-                $this->wp_post .= "({$this->saving_percent}%)* ðŸŽŠ";
+                $this->wp_post .= "({$this->saving_percent}%)* 🕛";
             }
             $this->wp_post .= "\r\n \r\n";
             if ($this->detail_page_url != "") {
@@ -188,14 +189,14 @@ class GetAmazonProductDetails extends Component
             $this->our_post = "$this->product_title";
             if ($this->mrp != "") {
                 $this->our_post .= "\r\n \r\n";
-                $this->our_post .= "MRP: ~{$this->mrp}~/- âœ… Lowest Price";
+                $this->our_post .= "MRP: ~{$this->mrp}~/- ⬇️ Lowest Price";
             }
             if ($this->offer_price != "") {
                 $this->our_post .= "\r\n \r\n";
                 $this->our_post .= "DEAL: *{$this->offer_price}/- ";
             }
             if ($this->saving_percent != "") {
-                $this->our_post .= "({$this->saving_percent}%)* ðŸŽŠ";
+                $this->our_post .= "({$this->saving_percent}%)* 🕛";
             }
             $this->our_post .= "\r\n \r\n";
             if ($this->our_link != "") {
@@ -205,10 +206,10 @@ class GetAmazonProductDetails extends Component
             $displayValues = $item['ItemInfo']['Features']['DisplayValues'] ?? null;
 
             if ($displayValues) {
-                $this->features_editor .= "<ul>\n";
+                $this->features_editor .= "<ul class='list-disc'>\n";
 
                 foreach ($displayValues as $key => $dv) {
-                    $this->features_editor .= "<li>{$dv}</li>\n";
+                    $this->features_editor .= "<li>✅ {$dv}</li>";
                 }
                 $this->features_editor .= "</ul>\n";
             }
