@@ -25,7 +25,6 @@ class Home extends Component
     public function mount()
     {
         $this->totalRecords = $this->perPage;
-        $this->date_to = now()->format('Y-m-d');
     }
 
     public function updatingSearch()
@@ -55,16 +54,19 @@ class Home extends Component
 
         // Filter by saving_percent (disc)
         if ($this->disc > 0) {
-            $query->where('saving_percent', '>=', $this->disc);
+            $query->where(function ($query) {
+                $query->where('saving_percent', '>=', $this->disc)
+                    ->orWhereNull('saving_percent');
+            });
         }
 
         // Filter by date range
         if ($this->date_from && $this->date_to) {
             $query->whereBetween('updated_at', [Carbon::parse($this->date_from), Carbon::parse($this->date_to)]);
         } elseif ($this->date_from) {
-            $query->where('updated_at', '>=', Carbon::parse($this->date_from));
+            $query->where('updated_at', '<=', Carbon::parse($this->date_from));
         } elseif ($this->date_to) {
-            $query->where('updated_at', '<=', Carbon::parse($this->date_to));
+            $query->where('updated_at', '>=', Carbon::parse($this->date_to));
         }
 
         // Apply sorting
@@ -79,6 +81,15 @@ class Home extends Component
         $this->totalRecords += $this->perPage;
     }
 
+    public function clearFilters()
+    {
+        $this->search = '';
+        $this->disc = 0;
+        $this->date_from = null;
+        $this->date_to = null;
+        $this->resetPage();
+    }
+    
     public function render()
     {
         return view(
