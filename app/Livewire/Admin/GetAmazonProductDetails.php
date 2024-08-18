@@ -7,10 +7,12 @@ ini_set('display_errors', 1);
 
 use App\Models\AmazonDeals;
 use App\Services\AwsV4;
-use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use Symfony\Component\BrowserKit\HttpBrowser;
 
 class GetAmazonProductDetails extends Component
@@ -231,6 +233,34 @@ class GetAmazonProductDetails extends Component
         }
         $message = $this->wp_post;
         app('App\Http\Controllers\TelegramBotController')->sendMessageToGroup($chatId, $message);
+    }
+
+    public function postToFacebookPage()
+    {
+        $pageId = '411901358668877'; //Page DealsDay
+
+        if (is_null($this->our_post)) {
+            session()->flash('error', "No message Generated");
+            return;
+        }
+        try {
+            $response = Http::post("https://graph.facebook.com/v20.0/{$pageId}/feed", [
+                'message' => $this->our_post,
+                'access_token' => env('FACEBOOK_PAGE_ACCESS_TOKEN'),
+            ]);
+
+            if ($response->successful()) {
+                $graphNode = $response->json();
+                Session::flash('success', 'Post ID: ' . $graphNode['id']);
+            } else {
+                Session::flash('error', 'Failed to post to Facebook: ' . $response->body());
+            }
+        } catch (\Exception $e) {
+            Log::error('Exception when posting to Facebook: ' . $e->getMessage());
+            Session::flash('error', 'Exception when posting to Facebook: ' . $e->getMessage());
+        }
+
+        return redirect()->back();
     }
 
     public function scrape()

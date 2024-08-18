@@ -4,6 +4,11 @@
         {{ session('error') }}
     </div>
     @endif
+    @if (session()->has('success'))
+    <div class="m-3 p-3 bg-green-500 font-medium rounded-lg">
+        {{ session('success') }}
+    </div>
+    @endif
     <div class="bg-white m-3 p-3 rounded-lg">
         <div class="overflow-auto">
             <div class="flex flex-col">
@@ -67,12 +72,18 @@
                             </button>
                         </form>
                     </div>
-                    <div class="grid grid-cols-8 gap-2 w-full mb-3 p-3">
+                    <div class="grid grid-cols-8 gap-2 w-full mb-3">
                         <label for="social_posts" class="col-span-8 text-gray-700 font-medium pb-2">Social Post</label>
-                        <button wire:click="sendTelegram" class="col-span-2 md:col-span-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
+                        <button wire:click="sendTelegram" class="col-span-2 md:col-span-1 text-white bg-cyan-400 hover:bg-cyan-500 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
                             <span wire:loading wire:target="sendTelegram">Loading..</span>
                             <span wire:loading.class="hidden" wire:target="sendTelegram" class="inline-flex items-center">
                                 Telegram
+                            </span>
+                        </button>
+                        <button wire:click="postToFacebookPage" class="col-span-2 md:col-span-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
+                            <span wire:loading wire:target="postToFacebookPage">Loading..</span>
+                            <span wire:loading.class="hidden" wire:target="postToFacebookPage" class="inline-flex items-center">
+                                Facebook
                             </span>
                         </button>
                     </div>
