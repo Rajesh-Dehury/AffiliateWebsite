@@ -151,8 +151,12 @@ class GetAmazonProductDetails extends Component
             ]);
 
             $this->json = $response->getBody()->getContents();
-            // dd($this->json);
+            // dd(json_decode($this->json, true),json_decode($this->json, true)['Errors'][0]['Message']);
             $this->response = json_decode($this->json, true);
+            if (array_key_exists("Errors", $this->response)) {
+                session()->flash('error', $this->response['Errors'][0]['Message']);
+                return;
+            }
 
             $item = $this->response['ItemsResult']['Items'][0];
             $this->product_asin = $item['ASIN'];
@@ -218,31 +222,60 @@ class GetAmazonProductDetails extends Component
         }
     }
 
+    public function sendTelegram()
+    {
+        $chatId = '-1002191566525';
+        if (is_null($this->wp_post)) {
+            session()->flash('error', "No message Generated");
+            return;
+        }
+        $message = $this->wp_post;
+        app('App\Http\Controllers\TelegramBotController')->sendMessageToGroup($chatId, $message);
+    }
+
     public function scrape()
     {
         $this->validate([
             'url' => 'required|url',
         ]);
 
-        // Parse the URL to check for 'pd_rd_i' parameter
+        // Parse the URL
         $parsed_url = parse_url($this->url);
         parse_str($parsed_url['query'] ?? '', $query_params);
 
+        // Check for 'pd_rd_i' parameter in the query string
         if (isset($query_params['pd_rd_i'])) {
             // If 'pd_rd_i' parameter is present, use it as the ASIN
             $this->asin = $query_params['pd_rd_i'];
         } else {
-            // Otherwise, scrape the ASIN from the page
-            $client = new HttpBrowser();
-            $crawler = $client->request('GET', $this->url);
+            // If not, look for the ASIN in the URL path
+            $path_segments = explode('/', $parsed_url['path']);
 
-            $this->asin = $crawler->filter('input[name="ASIN"]')->attr('value');
+            foreach ($path_segments as $segment) {
+                // Look for a segment that matches the ASIN pattern
+                if (preg_match('/^B[A-Z0-9]{9}$/', $segment)) {
+                    $this->asin = $segment;
+                    break;
+                }
+            }
+
+            // If ASIN is still not found, attempt to scrape it from the page
+            if (!$this->asin) {
+                $client = new HttpBrowser();
+                $crawler = $client->request('GET', $this->url);
+
+                $this->asin = $crawler->filter('input[name="ASIN"]')->attr('value');
+            }
         }
 
         if ($this->asin) {
             $this->fetchProductDetails();
+        } else {
+            session()->flash('error', "Not Found ASIN");
+            return;
         }
     }
+
 
     public function savePost()
     {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RedirectController;
+use App\Http\Controllers\TelegramBotController;
 use App\Livewire\AboutUs;
 use App\Livewire\Admin\AllPosts;
 use App\Livewire\Admin\Auth\Login;
@@ -54,4 +55,14 @@ Route::middleware(['auth:admin'])->group(function () {
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
     })->name('admin.logout');
+});
+
+
+Route::post('/{token}/webhook', [TelegramBotController::class, 'handleWebhook']);
+Route::get('/set-webhook', [TelegramBotController::class, 'setWebhook']);
+
+Route::get('/send-message', function () {
+    $chatId = '-1002191566525'; 
+    $message = 'Hi Preet';
+    app('App\Http\Controllers\TelegramBotController')->sendMessageToGroup($chatId, $message);
 });

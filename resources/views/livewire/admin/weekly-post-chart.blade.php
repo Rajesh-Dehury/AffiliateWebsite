@@ -1,7 +1,7 @@
 <div>
     @push('js')
     <script>
-        const chart = new Chart(
+        var chart = new Chart(
             document.getElementById('chart'), {
                 type: 'line',
                 data: {
@@ -38,7 +38,7 @@
     @endpush
 
     <div class="bg-white p-4 mx-4 mt-4 rounded-lg">
-        <div>
+        <div wire:ignore>
             <canvas id="chart"></canvas>
         </div>
     </div>
