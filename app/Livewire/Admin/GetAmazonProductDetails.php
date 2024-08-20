@@ -221,6 +221,7 @@ class GetAmazonProductDetails extends Component
             }
         } catch (RequestException $e) {
             $this->response = ['error' => $e->getMessage()];
+            session()->flash('error', "Too Many Requests");
         }
     }
 
@@ -251,7 +252,8 @@ class GetAmazonProductDetails extends Component
 
             if ($response->successful()) {
                 $graphNode = $response->json();
-                Session::flash('success', 'Post ID: ' . $graphNode['id']);
+                // Session::flash('success', 'Post ID: ' . $graphNode['id']);
+                Session::flash('success', 'Posted to Facebook');
             } else {
                 Session::flash('error', 'Failed to post to Facebook: ' . $response->body());
             }
@@ -334,5 +336,6 @@ class GetAmazonProductDetails extends Component
                 'our_post' => $this->our_post,
             ]
         );
+        Session::flash('success', 'Posted to DealsDay24.in');
     }
 }

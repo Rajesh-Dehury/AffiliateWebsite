@@ -39,7 +39,7 @@
                             wire:model="url"
                             wire:loading.attr="disabled"
                             placeholder="Enter product URL"
-                            class="col-span-4 md:col-span-6 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            class="col-span-6 md:col-span-7 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         <button
                             wire:loading.attr="disabled"
                             wire:loading.class="opacity-50"
@@ -49,15 +49,6 @@
                             <span wire:loading.remove wire:target="scrape">Generate</span>
                             <span wire:loading="scrape" wire:target="scrape">Loading...</span>
                         </button>
-                        <div
-                            wire:loading.attr="disabled"
-                            wire:loading.class="opacity-50"
-                            wire:click="savePost"
-                            type="button"
-                            class="cursor-pointer col-span-2 md:col-span-1 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
-                            <span wire:loading.remove wire:target="savePost">Post</span>
-                            <span wire:loading="savePost" wire:target="savePost">Loading...</span>
-                        </div>
                     </form>
 
                     @error('url')
@@ -85,6 +76,15 @@
                             <span wire:loading.class="hidden" wire:target="postToFacebookPage" class="inline-flex items-center">
                                 Facebook
                             </span>
+                        </button>
+                        <button
+                            wire:loading.attr="disabled"
+                            wire:loading.class="opacity-50"
+                            wire:click="savePost"
+                            type="button"
+                            class="cursor-pointer col-span-2 md:col-span-1 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
+                            <span wire:loading.remove wire:target="savePost">Website</span>
+                            <span wire:loading="savePost" wire:target="savePost">Loading...</span>
                         </button>
                     </div>
                     <div class="grid grid-cols-8 gap-2 w-full mb-3">

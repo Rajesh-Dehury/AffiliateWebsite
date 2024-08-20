@@ -1,6 +1,6 @@
 <nav x-data="{ isOpen: false }" class="relative bg-white shadow dark:bg-gray-800">
-    <div class="container px-0 lg:px-6 py-3 mx-auto md:flex">
-        <div class="flex justify-between items-center px-5">
+    <div class="container py-3 mx-auto md:flex">
+        <div class="flex justify-between items-center">
             <div>
                 <a href="{{route('home')}}" class="text-xl font-bold text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-700 dark:hover:text-gray-300">
                     <div class="flex items-center">

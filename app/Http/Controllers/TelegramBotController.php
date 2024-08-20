@@ -16,6 +16,7 @@ class TelegramBotController extends Controller
                 'chat_id' => $chatId,
                 'text' => $message,
             ]);
+            session()->flash('success', 'Posted to Telegram!');
         } catch (TelegramSDKException $e) {
             // Handle exception
             Log::error($e->getMessage());
