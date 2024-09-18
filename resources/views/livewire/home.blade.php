@@ -1,16 +1,20 @@
 <div x-data="{ isOpenFilter: false }" class="p-5">
     <div class="flex justify-end mb-3 space-x-2">
-        <input wire:model.live="search" type="text" class="w-full md:hidden py-2 px-4 text-gray-700 bg-white border border-blue-500 rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300" placeholder="Search">
+        <!-- Search Input (Mobile) -->
+        <input wire:model.live="search" type="text" class="w-full md:hidden py-2 px-4 text-gray-700 bg-white border border-blue-500 rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300" placeholder="Search products...">
+
+        <!-- Filter Button (Mobile) -->
         <div class="block md:hidden">
-            <!-- Filter Icon for Small Devices -->
-            <button @click="isOpenFilter = true" class="text-blue-500 bg-white p-3 rounded-lg shadow border border-blue-400">
+            <button @click="isOpenFilter = true" class="text-blue-500 bg-white p-3 rounded-lg shadow border border-blue-400" aria-label="Open Filters">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707l-5 5a1 1 0 00-.293.707v4.586a1 1 0 01-.293.707l-2 2A1 1 0 0110 21v-6.586a1 1 0 00-.293-.707l-5-5A1 1 0 014 6V4z" />
                 </svg>
             </button>
         </div>
+
+        <!-- Clear Filters Button (Mobile) -->
         <div class="block md:hidden">
-            <button wire:click="clearFilters" class="text-blue-500 bg-white p-3 rounded-lg shadow border border-blue-400">
+            <button wire:click="clearFilters" class="text-blue-500 bg-white p-3 rounded-lg shadow border border-blue-400" aria-label="Clear Filters">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                 </svg>
@@ -20,70 +24,81 @@
 
     <div class="grid grid-cols-12">
         <!-- Filter Menu -->
-        <div x-cloak :class="{'translate-x-0': isOpenFilter, 'translate-x-full': !isOpenFilter}" class="col-span-3 md:col-span-3 fixed inset-y-0 right-0 bg-white z-50 px-5 transition-transform duration-300 transform md:translate-x-0 md:relative md:z-auto md:bg-transparent">
+        <aside x-cloak :class="{'translate-x-0': isOpenFilter, 'translate-x-full': !isOpenFilter}" class="col-span-3 md:col-span-3 fixed inset-y-0 right-0 bg-white z-50 px-5 transition-transform duration-300 transform md:translate-x-0 md:relative md:z-auto md:bg-transparent" aria-labelledby="filters-heading">
             <div :class="{'shadow-lg': !isOpenFilter}" class="p-5 bg-white rounded-lg">
                 <div class="flex items-center justify-between mb-3">
-                    <p class="text-2xl font-semibold">Filters</p>
+                    <h2 id="filters-heading" class="text-2
+                    <h2 id=" filters-heading" class="text-2xl font-semibold">Filters</h2>
                     <div>
-                        <button @click="isOpenFilter = false" :class="{'hidden': !isOpenFilter}" class="text-red-50 bg-red-500 p-2 rounded-lg shadow border border-red-400">
+                        <button @click="isOpenFilter = false" :class="{'hidden': !isOpenFilter}" class="text-red-50 bg-red-500 p-2 rounded-lg shadow border border-red-400" aria-label="Close Filters">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
                         </button>
-                        <button wire:click="clearFilters" class="text-blue-500 bg-white p-2 rounded-lg shadow border border-blue-400">
+                        <button wire:click="clearFilters" class="text-blue-500 bg-white p-2 rounded-lg shadow border border-blue-400" aria-label="Clear All Filters">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                             </svg>
                         </button>
                     </div>
                 </div>
+
+                <!-- Search Field in Filters Menu -->
                 <div :class="{'hidden': isOpenFilter}" class="mb-3">
-                    <input wire:model.live="search" type="text" class="w-full py-2 px-4 text-gray-700 bg-white border border-blue-500 rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300" placeholder="Search">
+                    <input wire:model.live="search" type="text" class="w-full py-2 px-4 text-gray-700 bg-white border border-blue-500 rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300" placeholder="Search products...">
                 </div>
+
+                <!-- Date Range Filter -->
                 <div class="mb-3">
                     <div class="mb-2">
-                        <label for="">Date From</label>
-                        <input wire:model.live="date_from" type="date" class="w-full py-2 px-4 text-gray-700 bg-white border border-blue-500 rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300">
+                        <label for="date_from">Date From</label>
+                        <input wire:model.live="date_from" id="date_from" type="date" class="w-full py-2 px-4 text-gray-700 bg-white border border-blue-500 rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300">
                     </div>
                     <div>
-                        <label for="">Date To</label>
-                        <input wire:model.live="date_to" type="date" class="w-full py-2 px-4 text-gray-700 bg-white border border-blue-500 rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300">
+                        <label for="date_to">Date To</label>
+                        <input wire:model.live="date_to" id="date_to" type="date" class="w-full py-2 px-4 text-gray-700 bg-white border border-blue-500 rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300">
                     </div>
                 </div>
+
+                <!-- Discount Filter -->
                 <div class="mb-3">
-                    <label for="">Discount ({{$disc}}%)</label>
-                    <input wire:model.live="disc" type="range" class="w-full">
+                    <label for="discount">Discount ({{$disc}}%)</label>
+                    <input wire:model.live="disc" id="discount" type="range" class="w-full">
                 </div>
             </div>
-        </div>
+        </aside>
 
         <!-- Main Content -->
         <div class="col-span-12 md:col-span-9">
             <div class="grid grid-cols-12 gap-4">
                 @forelse($records as $record)
-                <div class="bg-white col-span-12 md:col-span-4 rounded-xl shadow-lg">
+                <article class="bg-white col-span-12 md:col-span-4 rounded-xl shadow-lg">
                     <div class="relative">
+                        <!-- Product Time and Discount Labels -->
                         <p class="text-xs bg-gray-700 text-white rounded-tl-lg absolute top-0 left-0 px-2 py-1.5" wire:ignore>{{$record->updated_at->diffForHumans();}}</p>
                         @if($record->saving_percent)
-                        <p class="text-xs bg-red-700 text-white rounded-tr-lg absolute top-0 right-0 px-2 py-1.5">UPTO {{$record->saving_percent}} % OFF</p>
+                        <p class="text-xs bg-red-700 text-white rounded-tr-lg absolute top-0 right-0 px-2 py-1.5">UP TO {{$record->saving_percent}}% OFF</p>
                         @endif
-                        <img src="{{$record->primary_large_url}}" alt="" class="h-60 w-full rounded-lg object-contain">
+
+                        <!-- Product Image -->
+                        <img src="{{$record->primary_large_url}}" alt="{{ $record->product_title }}" class="h-60 w-full rounded-lg object-contain" loading="lazy">
+
+                        <!-- Product Title Overlay -->
                         <div class="h-24 w-full bg-gradient-to-t from-gray-800 bottom-0 rounded-t-lg">
                             <div class="absolute bottom-2 px-3">
-                                <p class="text-sm mb-1 text-white">{{\Str::limit($record->product_title,70)}}</p>
+                                <h3 class="text-sm mb-1 text-white">{{\Str::limit($record->product_title,70)}}</h3>
                             </div>
                         </div>
                     </div>
-                    <div class="">
-                        <p class="font-bold text-green-600 hidden">Up to 90% off</p>
-                    </div>
+
+                    <!-- Product Actions -->
                     <div class="grid grid-cols-2">
                         <a wire:navigate href="{{route('details',$record->id)}}" class="col-span-1 text-center py-3 bg-blue-600 rounded-bl-lg text-white font-semibold">Details</a>
-                        <a href="{{$record->our_link}}" target="_blank" class="col-span-1 text-center py-3 bg-gray-50 rounded-br-lg font-semibold">Check Now</a>
+                        <a href="{{$record->our_link}}" target="_blank" class="col-span-1 text-center py-3 bg-gray-50 rounded-br-lg font-semibold" rel="nofollow noopener noreferrer">Check Now</a>
                     </div>
-                </div>
+                </article>
                 @empty
-                <p>No Posts Found</p>
+                <p>No products found.</p>
                 @endforelse
                 @if($records->hasMorePages())
                 <div wire:loading wire:target="loadMore" class="bg-white border p-1 col-span-12 md:col-span-4 rounded-xl animate-pulse">
@@ -127,14 +142,17 @@
                 </div>
                 @endif
             </div>
+            <div class="flex justify-center mt-10 mb-6">
+                <p class="py-2 bg-blue-500 rounded-3xl px-10 shadow-xl text-white cursor-pointer" wire:click="loadMore">Load more</p>
+            </div>
         </div>
     </div>
 
-    <script>
+    <!-- <script>
         document.addEventListener('scroll', function() {
             if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
                 @this.call('loadMore');
             }
         });
-    </script>
+    </script> -->
 </div>

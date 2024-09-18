@@ -5,7 +5,7 @@
         <section class="mb-12">
             <h2 class="text-3xl font-semibold text-blue-500 mb-4">Privacy Policy for DealsDay24.in</h2>
             <p class="text-xl">
-                At DealsDay24.in, accessible from <a href="http://dealsday24.in" class="text-blue-600 hover:underline">http://dealsday24.in</a>, safeguarding the privacy of our visitors is one of our top priorities. This Privacy Policy outlines the types of information that DealsDay24.in collects and records, and how we utilize it.
+                At DealsDay24.in, accessible from <a href="http://dealsday24.in" class="text-blue-600 hover:underline" aria-label="Visit DealsDay24.in">http://dealsday24.in</a>, safeguarding the privacy of our visitors is one of our top priorities. This Privacy Policy outlines the types of information that DealsDay24.in collects and records, and how we utilize it.
             </p>
         </section>
 
@@ -43,7 +43,7 @@
         <section class="mb-12">
             <h2 class="text-3xl font-semibold text-blue-500 mb-4">Third-Party Privacy Policies</h2>
             <p class="text-xl">
-                The Privacy Policy of DealsDay24.in does not apply to other advertisers or websites. Therefore, we advise you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. These policies may include their practices and instructions on how to opt-out of certain options. You can find a comprehensive list of these Privacy Policies and their links here: Privacy Policy Links.
+                The Privacy Policy of DealsDay24.in does not apply to other advertisers or websites. Therefore, we advise you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. These policies may include their practices and instructions on how to opt-out of certain options. You can find a comprehensive list of these Privacy Policies and their links here: <a href="URL_to_privacy_policy_links" class="text-blue-600 hover:underline">Privacy Policy Links</a>.
             </p>
             <p class="text-xl mt-4">
                 You have the option to disable cookies through your individual browser settings. For more detailed information about cookie management with specific web browsers, you can refer to the browsers’ respective websites.
