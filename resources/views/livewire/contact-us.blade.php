@@ -1,5 +1,95 @@
 <div class="bg-gray-200 text-gray-800 font-sans leading-relaxed">
-    <section class="max-w-4xl mx-auto p-8">
+
+    <section class="mx-auto p-8">
+        <h2 class="mb-10 mt-5 text-4xl tracking-tight font-extrabold text-center text-blue-600">Social Groups</h2>
+
+        <!-- Card Container -->
+        <div class="grid grid-cols-1 gap-6">
+
+            <!-- WhatsApp Groups Card -->
+            <div class="bg-white rounded-3xl ounded-lg shadow-lg p-6">
+                <div class="flex items-center mb-4">
+                    <h3 class="text-2xl font-bold">WhatsApp Groups</h3>
+                </div>
+                <p class="text-gray-800 mb-4">Join any of our WhatsApp groups to stay connected:</p>
+
+                <!-- Links for WhatsApp Groups -->
+                <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                    <li class="bg-blue-100 p-3 rounded-xl flex justify-between items-center group">
+                        <div class="flex">
+                            <img src="{{asset('whatsapp-svgrepo-com.svg')}}" alt="" class="h-6 w-6 group-hover:scale-125 transition duration-150">
+                            <a href="https://chat.whatsapp.com/K5lVjY7pPH35B8U0GdIv2K" target="_blank" class="text-blue-500 font-bold ml-5">DealsDay</a>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                        </svg>
+                    </li>
+                    <li class="bg-blue-100 p-3 rounded-xl flex justify-between items-center group">
+                        <div class="flex">
+                            <img src="{{asset('whatsapp-svgrepo-com.svg')}}" alt="" class="h-6 w-6 group-hover:scale-125 transition duration-150">
+                            <a href="https://chat.whatsapp.com/JIporKDkkEQFsCYTMp1H7D" target="_blank" class="text-blue-500 font-bold ml-5">DealsDay 2</a>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                        </svg>
+                    </li>
+                    <li class="bg-blue-100 p-3 rounded-xl flex justify-between items-center group">
+                        <div class="flex">
+                            <img src="{{asset('whatsapp-svgrepo-com.svg')}}" alt="" class="h-6 w-6 group-hover:scale-125 transition duration-150">
+                            <a href="https://chat.whatsapp.com/IhleNxgHdhQEmKbm8rIos3" target="_blank" class="text-blue-500 font-bold ml-5">DealsDay 3</a>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                        </svg>
+                    </li>
+                    <li class="bg-blue-100 p-3 rounded-xl flex justify-between items-center group">
+                        <div class="flex">
+                            <img src="{{asset('whatsapp-svgrepo-com.svg')}}" alt="" class="h-6 w-6 group-hover:scale-125 transition duration-150">
+                            <a href="https://chat.whatsapp.com/DQAE7QgWFUQ9okzFjsHWso" target="_blank" class="text-blue-500 font-bold ml-5">DealsDay 4</a>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                        </svg>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-5">
+            <!-- Whatsapp Card -->
+            <a href="https://wa.me/+916371391755" target="_blank" class="bg-white group hover:bg-green-300 hover:text-white rounded-3xl ounded-lg shadow-lg p-6">
+                <div class="flex items-center justify-between">
+                    <img src="{{asset('whatsapp-svgrepo-com.svg')}}" alt="" class="h-10 w-10 group-hover:scale-125 transition duration-150 group-hover:translate-x-4">
+                    <h3 class="text-xl font-bold ml-2 mb-0">Whatsapp</h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 justify-self-end ml-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                    </svg>
+                </div>
+                <!-- <p class="text-gray-800 mb-4">Join our Telegram groups to get involved</p> -->
+            </a>
+            <a href="https://t.me/DealsDay_24" target="_blank" class="bg-white group hover:bg-blue-300 hover:text-white rounded-3xl ounded-lg shadow-lg p-6">
+                <div class="flex items-center justify-between">
+                    <img src="{{asset('telegram-svgrepo-com.svg')}}" alt="" class="h-10 w-10 group-hover:scale-125 transition duration-150 group-hover:translate-x-4">
+                    <h3 class="text-xl font-bold ml-2 mb-0">Telegram</h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 justify-self-end ml-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                    </svg>
+                </div>
+                <!-- <p class="text-gray-800 mb-4">Join our Telegram groups to get involved</p> -->
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61564583578956" target="_blank" class="bg-white group hover:bg-blue-600 hover:text-white rounded-3xl ounded-lg shadow-lg p-6">
+                <div class="flex items-center justify-between">
+                    <img src="{{asset('facebook-svgrepo-com.svg')}}" alt="" class="h-10 w-10 group-hover:scale-125 transition duration-150 group-hover:translate-x-4">
+                    <h3 class="text-xl font-bold ml-2 mb-0">Facebook</h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 justify-self-end ml-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                    </svg>
+                </div>
+                <!-- <p class="text-gray-800 mb-4">Follow our Facebook channels for updates</p> -->
+            </a>
+        </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto p-8 bg-white rounded-t-3xl">
         <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-blue-600">Contact Us</h2>
         <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 sm:text-xl">
             Got a technical issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.

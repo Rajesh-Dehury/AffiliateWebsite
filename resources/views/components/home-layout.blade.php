@@ -25,16 +25,18 @@
 <body class="bg-gray-100 h-screen font-sans">
     <x-home-top-nav />
     <div class="min-h-screen">
-        {{$slot}}
+        <div class="pt-20 md:pt-0">
+            {{$slot}}            
+        </div>
     </div>
     <div class="fixed bottom-4 right-4 flex flex-col space-y-3">
         <!-- WhatsApp Icon -->
-        <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" class="bg-green-500 p-2.5 rounded-full shadow-lg hover:bg-green-600 hover:drop-shadow-lg hover:shadow-green-300 transition duration-300">
+        <a href="https://wa.me/+916371391755" target="_blank" class="bg-green-500 p-2.5 rounded-full shadow-lg hover:bg-green-600 hover:drop-shadow-lg hover:shadow-green-300 transition duration-300">
             <img src="{{asset('whatsapp-svgrepo-com.svg')}}" alt="" class="h-10 w-10 transition duration-300">
         </a>
 
         <!-- Telegram Icon -->
-        <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" class="bg-blue-500 p-2.5 rounded-full shadow-lg hover:bg-blue-600 hover:drop-shadow-lg hover:shadow-blue-300 transition duration-300">
+        <a href="https://t.me/DealsDay_24" target="_blank" class="bg-blue-500 p-2.5 rounded-full shadow-lg hover:bg-blue-600 hover:drop-shadow-lg hover:shadow-blue-300 transition duration-300">
             <img src="{{asset('telegram-svgrepo-com.svg')}}" alt="" class="h-10 w-10">
         </a>
     </div>

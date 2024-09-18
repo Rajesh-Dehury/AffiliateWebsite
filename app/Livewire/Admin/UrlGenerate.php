@@ -30,6 +30,29 @@ class UrlGenerate extends Component
         $this->amazon_partner_tag = env('AMAZON_PARTNER_TAG');
     }
 
+    public function updatedPrice()
+    {
+        if (strpos($this->price, '₹ ') === false) {
+            $this->price = '₹ ' . $this->price;
+        }
+        $this->generateWpPost();
+    }
+    public function updatedMrp()
+    {
+        if (strpos($this->mrp, '₹ ') === false) {
+            $this->mrp = '₹ ' . $this->mrp;
+        }
+
+        $this->generateWpPost();
+    }
+    public function updatedSavingPercent()
+    {
+        if (strpos($this->saving_percent, '₹ ') === false) {
+            $this->saving_percent = '₹ ' . $this->saving_percent;
+        }
+        $this->generateWpPost();
+    }
+
     public function scrape()
     {
         // Validate the input URL
@@ -71,38 +94,45 @@ class UrlGenerate extends Component
         $this->new_url = "https://www.amazon.in/dp/{$this->asin}?psc=1&tag=codewithrd-21";
 
         // Scrape the product title
-        $product_title = $crawler->filter('#productTitle')->text();
-        $this->product_title = trim($product_title);
+        try {
+            $product_title = $crawler->filter('#productTitle')->text();
+            $this->product_title = trim($product_title);
+        } catch (\Exception $e) {
+        }
 
         // Scrape the price from the page
         try {
-            // First, try to get the price from .a-offscreen (if it exists)
-            $this->price = $crawler->filter('.a-price .a-offscreen')->first()->text();
+            // Try to get the price from the '.a-price-whole' and '.a-price-decimal' if they exist
+            $whole_price = $crawler->filter('.a-price-whole')->text();
+            $decimal_price = $crawler->filter('.a-price-decimal')->text();
+            $this->price = trim($whole_price) . (empty($decimal_price) ? '' : '.' . trim($decimal_price));
         } catch (\Exception $e) {
-            // If not found, fall back to .a-price-whole
-            try {
-                $whole_price = $crawler->filter('.a-price-whole')->text();
-                $fraction_price = $crawler->filter('.a-price-fraction')->text();
-                $this->price = trim($whole_price) . "." . trim($fraction_price);
-            } catch (\Exception $e) {
-                $this->price = "Price not found";
-            }
+            // Handle or log the exception if needed
+            // $this->price = 'Price not found';
         }
 
         try {
-            $this->mrp = $crawler->filter('.a-text-price .a-offscreen')->first()->text();
+            // Extract the MRP from the span with class 'a-offscreen' within 'a-price a-text-price'
+            $this->mrp = $crawler->filter('.a-price.a-text-price .a-offscreen')->first()->text();
         } catch (\Exception $e) {
-            $this->mrp = "MRP not found";
+            // Handle or log the exception if needed
+            // $this->mrp = 'MRP not found';
         }
 
-
         try {
+            // Get the saving percentage from '.savingsPercentage' if it exists
             $this->saving_percent = $crawler->filter('.savingsPercentage')->text();
         } catch (\Exception $e) {
-            $this->saving_percent = "Savings percentage not found";
+            // Handle or log the exception if needed
+            // $this->saving_percent = 'Saving percentage not found';
         }
 
         // Construct the WordPress post content
+        $this->generateWpPost();
+    }
+
+    public function generateWpPost()
+    {
         $this->wp_post = "$this->product_title";
         if ($this->mrp != "") {
             $this->wp_post .= "\r\n \r\n";
@@ -120,7 +150,6 @@ class UrlGenerate extends Component
             $this->wp_post .= "LINK : {$this->new_url}";
         }
     }
-
 
     public function sendTelegram()
     {
@@ -160,6 +189,36 @@ class UrlGenerate extends Component
         }
 
         return redirect()->back();
+    }
+
+    public function savePost()
+    {
+        $this->validate([
+            'asin' => 'required',
+            'new_url' => 'required',
+            'product_title' => 'required',
+        ]);
+
+        AmazonDeals::updateOrCreate(
+            ['product_asin' => $this->asin],
+            [
+                'product_asin' => $this->asin,
+                'product_asin_hash' => "",
+                'detail_page_url' => $this->new_url,
+                'primary_large_url' => asset('default_image.png'),
+                'product_title' => $this->product_title,
+                'mrp' => $this->mrp,
+                'offer_price' => $this->price,
+                'saving_percent' => $this->saving_percent,
+                'saving_amount' => "",
+                'features_editor' => "",
+                'our_link' => $this->new_url,
+                'json' => "",
+                'wp_post' => $this->wp_post,
+                'our_post' => $this->wp_post,
+            ]
+        );
+        Session::flash('success', 'Posted to DealsDay24.in');
     }
 
     public function resetT()

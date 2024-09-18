@@ -45,11 +45,34 @@
                             Facebook
                         </span>
                     </button>
+                    <button
+                        wire:loading.attr="disabled"
+                        wire:loading.class="opacity-50"
+                        wire:click="savePost"
+                        type="button"
+                        class="cursor-pointer col-span-2 md:col-span-1 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
+                        <span wire:loading.remove wire:target="savePost">Website</span>
+                        <span wire:loading="savePost" wire:target="savePost">Loading...</span>
+                    </button>
+                </div>
+                <div class="grid grid-cols-12 gap-2 w-full mb-3">
+                    <div class="md:col-span-4 col-span-12">
+                        <label for="price" class="text-gray-700 font-medium pb-2 block">Price</label>
+                        <input id="price" wire:model.live="price" type="text" class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    </div>
+                    <div class="md:col-span-4 col-span-12">
+                        <label for="mrp" class="text-gray-700 font-medium pb-2 block">MRP</label>
+                        <input id="mrp" wire:model.live="mrp" type="text" class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    </div>
+                    <div class="md:col-span-4 col-span-12">
+                        <label for="saving_percent" class="text-gray-700 font-medium pb-2 block">Discount(%)</label>
+                        <input id="saving_percent" wire:model.live="saving_percent" type="text" class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    </div>
                 </div>
                 @if($wp_post)
                 <label for="wp_post" class="text-gray-700 font-medium pb-2 block">WP Post</label>
                 <div class="grid grid-cols-8 gap-2 w-full mb-3">
-                    <textarea id="wp_post" x-ref="wp_post" type="text" class="col-span-6 md:col-span-7 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" wire:model="wp_post" disabled readonly></textarea>
+                    <textarea cols="10" id="wp_post" x-ref="wp_post" type="text" class="col-span-6 md:col-span-7 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" wire:model="wp_post" disabled readonly></textarea>
                     <button @click="copyToClipboard('wp_post')" class="col-span-2 md:col-span-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
                         <span x-show="copiedField !== 'wp_post'">Copy</span>
                         <span x-show="copiedField === 'wp_post'" class="inline-flex items-center">
@@ -98,21 +121,6 @@
                     <button @click="copyToClipboard('product_title')" class="col-span-2 md:col-span-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
                         <span x-show="copiedField !== 'product_title'">Copy</span>
                         <span x-show="copiedField === 'product_title'" class="inline-flex items-center">
-                            <svg class="w-3 h-3 text-white me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
-                            </svg>
-                            Copied!
-                        </span>
-                    </button>
-                </div>
-                @endif
-                @if($price)
-                <label for="price" class="text-gray-700 font-medium pb-2 block">Product Title</label>
-                <div class="grid grid-cols-8 gap-2 w-full mb-3">
-                    <input id="price" x-ref="price" type="text" class="col-span-6 md:col-span-7 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" wire:model="price" disabled readonly>
-                    <button @click="copyToClipboard('price')" class="col-span-2 md:col-span-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
-                        <span x-show="copiedField !== 'price'">Copy</span>
-                        <span x-show="copiedField === 'price'" class="inline-flex items-center">
                             <svg class="w-3 h-3 text-white me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
                             </svg>

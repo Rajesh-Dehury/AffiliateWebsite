@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <div class="max-w-3xl mx-auto p-6 bg-gray-100 shadow-md rounded-lg mt-3">
+            <div class="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg mt-3">
                 <h1 class="text-2xl font-bold text-gray-800 mb-6">Follow these simple steps to get the deal:</h1>
                 <ol class="list-decimal list-inside space-y-4 text-gray-800">
                     <li class="flex items-center">
@@ -45,12 +45,12 @@
                 </ol>
             </div>
             @if($record->features_editor)
-            <div class="max-w-3xl mx-auto p-6 bg-gray-100 shadow-md rounded-lg mt-3">
+            <div class="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg mt-3">
                 <p class="mb-3 text-xl font-bold">Details</p>
                 <p class="text-sm">{!!$record->features_editor!!}</p>
             </div>
             @endif
-            <div class="max-w-3xl mx-auto p-6 bg-gray-100 shadow-md rounded-lg mt-3 relative bg-yellow-200">
+            <div class="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg mt-3 relative bg-yellow-200">
                 <p class="mb-3 text-sm font-bold absolute top-0 left-0 px-3 py-1.5 bg-red-600 text-white rounded-tl-lg">NOTE</p>
                 <p class="text-sm mt-3 font-mono text-yellow-950">Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on Amazon India at the time of purchase will apply to the purchase of this product.</p>
             </div>
