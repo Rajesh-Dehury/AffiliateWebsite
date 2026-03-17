@@ -14,11 +14,14 @@ class RedirectController extends Controller
 
         // Check if the item exists
         if ($item) {
+            // Increment clicks count
+            $item->increment('clicks_count');
+            
             // Get the URL from the item
             $url = $item->detail_page_url;
 
             // Sleep for 2 seconds
-            sleep(2);
+            // sleep(2); // Reduced or removed sleep for better UX unless specifically needed for some reason
 
             // Redirect to the URL
             return redirect()->away($url);

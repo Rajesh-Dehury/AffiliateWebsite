@@ -40,7 +40,8 @@ Route::get('/about', AboutUs::class)->name('about');
 Route::get('/privacy', Privacy::class)->name('privacy');
 Route::get('/disclaimer', Disclaimer::class)->name('disclaimer');
 Route::get('/contact', ContactUs::class)->name('contact');
-Route::get('details/{prod_id}', PostDetails::class)->name('details');
+Route::get('/deal/{slug_or_id}', PostDetails::class)->name('details');
+Route::get('details/{prod_id}', PostDetails::class); // Keep for legacy links if needed
 Route::get('/open/{product_asin}', [RedirectController::class, 'redirectToAnotherUrl'])->name('open.az.prod');
 
 Route::middleware(['guest:admin'])->group(function () {

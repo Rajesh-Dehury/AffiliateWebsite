@@ -1,3 +1,33 @@
+@push('seo')
+    <title>{{ $record->product_title }} - DealsDay24</title>
+    <meta name="description" content="Get the best deal on {{ $record->product_title }}. Now only {{ $record->offer_price }}. Original price: {{ $record->mrp }}.">
+    <meta property="og:title" content="{{ $record->product_title }} - DealsDay24">
+    <meta property="og:description" content="Get the best deal on {{ $record->product_title }}. Now only {{ $record->offer_price }}.">
+    <meta property="og:image" content="{{ $record->primary_large_url }}">
+    
+    <!-- JSON-LD for Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "{{ $record->product_title }}",
+      "image": "{{ $record->primary_large_url }}",
+      "description": "Get the best deal on {{ $record->product_title }}",
+      "brand": {
+        "@type": "Brand",
+        "name": "Amazon"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "{{ route('open.az.prod', $record->product_asin) }}",
+        "priceCurrency": "INR",
+        "price": "{{ preg_replace('/[^0-9.]/', '', $record->offer_price) }}",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+    </script>
+@endpush
+
 <div class="p-5">
     <div class="grid grid-cols-12">
         <!-- Main Content -->

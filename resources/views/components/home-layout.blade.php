@@ -8,6 +8,7 @@
      crossorigin="anonymous"></script>
     
     <!-- Title Tag for SEO -->
+    @stack('seo')
     <title>DealsDay24 - Best Deals and Offers on E-Commerce Sites in India</title>
 
     <!-- Meta Description for SEO -->

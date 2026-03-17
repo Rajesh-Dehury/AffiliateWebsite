@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\BrowserKit\HttpBrowser;
 
+use Illuminate\Support\Str;
+
 class GetAmazonProductDetails extends Component
 {
     public $url;
@@ -317,11 +319,16 @@ class GetAmazonProductDetails extends Component
             'product_title' => 'required',
         ]);
 
+        $slug = Str::slug($this->product_title);
+        $count = AmazonDeals::where('slug', 'LIKE', "{$slug}%")->count();
+        $finalSlug = $count ? "{$slug}-{$count}" : $slug;
+
         AmazonDeals::updateOrCreate(
             ['product_asin' => $this->product_asin],
             [
                 'product_asin' => $this->product_asin,
                 'product_asin_hash' => $this->product_asin_hash,
+                'slug' => $finalSlug,
                 'detail_page_url' => $this->detail_page_url,
                 'primary_large_url' => $this->primary_large_url,
                 'product_title' => $this->product_title,
@@ -339,3 +346,4 @@ class GetAmazonProductDetails extends Component
         Session::flash('success', 'Posted to DealsDay24.in');
     }
 }
+

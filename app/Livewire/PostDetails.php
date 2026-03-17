@@ -11,10 +11,17 @@ class PostDetails extends Component
     public $record;
     public $record_latests;
 
-    public function mount($prod_id)
+    public function mount($slug_or_id)
     {
-        $this->prod_id = $prod_id;
-        $this->record = AmazonDeals::find($prod_id);
+        // Find by slug or ID
+        $this->record = AmazonDeals::where('slug', $slug_or_id)->orWhere('id', $slug_or_id)->firstOrFail();
+        
+        // Update prod_id for backward compatibility with latest deals query
+        $this->prod_id = $this->record->id;
+        
+        // Increment the view count
+        $this->record->increment('views_count');
+        
         $this->record_latests = AmazonDeals::latest()->where('id', '!=', $this->prod_id)->take(3)->get();
     }
 
