@@ -10,6 +10,8 @@ class PostDetails extends Component
     public $prod_id;
     public $record;
     public $record_latests;
+    public $priceHistoryLabels = [];
+    public $priceHistoryData = [];
 
     public function mount($slug_or_id)
     {
@@ -23,6 +25,15 @@ class PostDetails extends Component
         $this->record->increment('views_count');
         
         $this->record_latests = AmazonDeals::latest()->where('id', '!=', $this->prod_id)->take(3)->get();
+
+        // Fetch Price History for Chart
+        $history = \App\Models\PriceHistory::where('amazon_deal_id', $this->prod_id)
+            ->orderBy('created_at', 'asc')
+            ->take(10)
+            ->get();
+
+        $this->priceHistoryLabels = $history->map(fn($h) => $history->count() > 5 ? $h->created_at->format('M d') : $h->created_at->format('M d H:i'))->toArray();
+        $this->priceHistoryData = $history->map(fn($h) => $h->price)->toArray();
     }
 
     public function render()

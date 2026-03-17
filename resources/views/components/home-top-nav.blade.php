@@ -1,45 +1,58 @@
-<nav x-data="{ isOpen: false, searchBox: false }" class="md:relative fixed bg-white shadow dark:bg-gray-800 w-full z-10">
-    <div class="container px-0 lg:px-6 py-3 mx-auto md:flex">
-        <div class="flex justify-between items-center md:px-5 pr-5">
-            <div class="group">
-                <a href="{{route('home')}}" class="text-xl font-bold text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-700 dark:hover:text-gray-300">
-                    <div class="flex items-center">
-                        <img src="{{asset('logo.png')}}" alt="" class="h-14 w-14 rounded-full group-hover:scale-110 transition">
-                        <p class="ml-0 mr-3">DealsDay</p>
-                    </div>
+<nav x-data="{ isOpen: false }" class="fixed top-0 left-0 right-0 z-[100] glass-card border-b border-gray-200/50">
+    <div class="container mx-auto px-4 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+            <!-- Logo -->
+            <a href="{{route('home')}}" class="flex items-center group transition-transform duration-300 hover:scale-105">
+                <div class="relative">
+                    <img src="{{asset('logo.png')}}" alt="DealsDay" class="h-12 w-12 rounded-2xl shadow-lg group-hover:rotate-6 transition-all duration-500">
+                    <div class="absolute -bottom-1 -right-1 bg-blue-600 h-4 w-4 rounded-full border-2 border-white"></div>
+                </div>
+                <div class="ml-3">
+                    <span class="text-xl font-extrabold tracking-tight gradient-text">DealsDay</span>
+                    <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">Best Deals 24/7</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden lg:flex items-center space-x-1">
+                <a href="{{route('home')}}" class="px-4 py-2 text-sm font-semibold text-gray-600 hover:text-blue-600 rounded-xl hover:bg-blue-50 transition-all duration-200 {{ request()->routeIs('home') ? 'bg-blue-50 text-blue-600' : '' }}">Home</a>
+                <a href="{{route('about')}}" class="px-4 py-2 text-sm font-semibold text-gray-600 hover:text-blue-600 rounded-xl hover:bg-blue-50 transition-all duration-200 {{ request()->routeIs('about') ? 'bg-blue-50 text-blue-600' : '' }}">About</a>
+                <a href="{{route('contact')}}" class="px-4 py-2 text-sm font-semibold text-gray-600 hover:text-blue-600 rounded-xl hover:bg-blue-50 transition-all duration-200 {{ request()->routeIs('contact') ? 'bg-blue-50 text-blue-600' : '' }}">Contact</a>
+                
+                <div class="h-6 w-px bg-gray-200 mx-2"></div>
+                
+                <a href="https://t.me/DealsDay_24" target="_blank" class="ml-2 px-5 py-2.5 bg-blue-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-blue-200 hover:bg-blue-700 hover:shadow-xl transition-all duration-300">
+                    Join Telegram
                 </a>
             </div>
 
             <!-- Mobile menu button -->
-            <div class="flex lg:hidden">
-                <button x-cloak @click="isOpen = !isOpen" type="button" class="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400" aria-label="toggle menu">
-                    <svg x-show="!isOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
-                    </svg>
-
-                    <svg x-show="isOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
+            <button @click="isOpen = !isOpen" type="button" class="lg:hidden p-2 rounded-xl text-gray-500 hover:bg-gray-100 transition-colors">
+                <svg x-show="!isOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <svg x-show="isOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
         </div>
 
-        <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
-        <div x-cloak :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']" class="inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white h-screen md:h-auto fixed dark:bg-gray-800 md:mt-0 md:p-0 md:top-0 md:relative md:opacity-100 md:translate-x-0 md:flex md:items-center md:justify-end">
-            <div class="flex flex-col px-0 -mx-4 md:flex-row md:mx-0 md:py-0">
-                <a href="{{route('home')}}" class="px-2.5 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 md:mx-2">Home</a>
-            </div>
-            <div class="flex flex-col px-0 -mx-4 md:flex-row md:mx-0 md:py-0">
-                <a href="{{route('about')}}" class="px-2.5 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 md:mx-2">About</a>
-            </div>
-            <div class="flex flex-col px-0 -mx-4 md:flex-row md:mx-0 md:py-0">
-                <a href="{{route('contact')}}" class="px-2.5 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 md:mx-2">Contact</a>
-            </div>
-            <div class="flex flex-col px-0 -mx-4 md:flex-row md:mx-0 md:py-0">
-                <a href="{{route('disclaimer')}}" class="px-2.5 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 md:mx-2">Disclaimer</a>
-            </div>
-            <div class="flex flex-col px-0 -mx-4 md:flex-row md:mx-0 md:py-0">
-                <a href="{{route('privacy')}}" class="px-2.5 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 md:mx-2">Privacy</a>
+        <!-- Mobile Menu -->
+        <div x-cloak 
+             x-show="isOpen" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-4"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-4"
+             class="lg:hidden pb-6 pt-2">
+            <div class="flex flex-col space-y-2">
+                <a href="{{route('home')}}" class="px-4 py-3 text-base font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded-xl">Home</a>
+                <a href="{{route('about')}}" class="px-4 py-3 text-base font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded-xl">About Us</a>
+                <a href="{{route('contact')}}" class="px-4 py-3 text-base font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded-xl">Contact</a>
+                <a href="{{route('privacy')}}" class="px-4 py-3 text-base font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded-xl">Privacy Policy</a>
+                <a href="https://t.me/DealsDay_24" target="_blank" class="mt-4 w-full py-4 bg-blue-600 text-white text-center font-bold rounded-2xl shadow-lg">Join Telegram Community</a>
             </div>
         </div>
     </div>

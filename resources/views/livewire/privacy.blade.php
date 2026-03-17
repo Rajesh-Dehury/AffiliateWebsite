@@ -1,173 +1,120 @@
-<div class="bg-gray-200 text-gray-800 font-sans leading-relaxed">
-    <div class="max-w-5xl mx-auto p-8">
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-blue-500 mb-4">Privacy Policy for DealsDay24.in</h2>
-            <p class="text-xl">
-                At DealsDay24.in, accessible from <a href="http://dealsday24.in" class="text-blue-600 hover:underline" aria-label="Visit DealsDay24.in">http://dealsday24.in</a>, safeguarding the privacy of our visitors is one of our top priorities. This Privacy Policy outlines the types of information that DealsDay24.in collects and records, how we utilize it, and your rights regarding your personal data.
-            </p>
-        </section>
+<div class="max-w-5xl mx-auto space-y-12">
+    <!-- Header Section -->
+    <header class="text-center space-y-4 py-10">
+        <h1 class="text-4xl md:text-6xl font-black tracking-tight text-slate-900">
+            Privacy <span class="gradient-text">Policy</span>
+        </h1>
+        <p class="text-slate-500 max-w-2xl mx-auto text-lg font-medium">
+            Your privacy is our priority. Learn how we handle your data and cookies.
+        </p>
+    </header>
 
-        <!-- Section: Data Controller and Contact Information -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-blue-500 mb-4">Data Controller and Contact Information</h2>
-            <p class="text-xl">
-                DealsDay24.in is operated by **DealsDay24**, which acts as the Data Controller for your personal data. If you have any questions or concerns about this Privacy Policy or your personal data, please contact us at:
+    <div class="space-y-8 pb-10">
+        <!-- Introduction -->
+        <div class="glass-card p-8 md:p-12 rounded-[2.5rem] border border-slate-100 shadow-sm space-y-6">
+            <h2 class="text-2xl font-black text-slate-900">Overview</h2>
+            <p class="text-slate-600 leading-relaxed font-medium">
+                At <span class="font-bold text-slate-900">DealsDay24.in</span>, we believe in transparency. This policy explains what information we collect, why we collect it, and how we protect your rights. By using our website, you consent to the practices described in this policy.
             </p>
-            <p class="text-xl mt-4">
-                Email: <a href="mailto:info@dealsday24.in" class="text-blue-600 hover:underline">info@dealsday24.in</a><br>
-                Address: Pitanali, Odisha 768106, India
-            </p>
-        </section>
+        </div>
 
-        <!-- Existing sections remain, updated as necessary -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <!-- Sidebar Navigation (Desktop) -->
+            <aside class="hidden md:block md:col-span-3 space-y-2 sticky top-32 h-fit">
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Quick Navigation</p>
+                <nav class="flex flex-col space-y-1">
+                    <a href="#log-files" class="text-sm font-bold text-slate-500 hover:text-blue-600 p-2 hover:bg-blue-50 rounded-xl transition-all">Log Files</a>
+                    <a href="#cookies" class="text-sm font-bold text-slate-500 hover:text-blue-600 p-2 hover:bg-blue-50 rounded-xl transition-all">Cookies Policy</a>
+                    <a href="#advertising" class="text-sm font-bold text-slate-500 hover:text-blue-600 p-2 hover:bg-blue-50 rounded-xl transition-all">Advertising Partners</a>
+                    <a href="#your-rights" class="text-sm font-bold text-slate-500 hover:text-blue-600 p-2 hover:bg-blue-50 rounded-xl transition-all">Your Rights</a>
+                </nav>
+            </aside>
 
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-blue-500 mb-4">Log Files</h2>
-            <p class="text-xl">
-                DealsDay24.in utilizes log files in line with standard practices. These files log visitors when they access websites, a common practice among hosting companies and part of their analytics services. The data collected by log files may include Internet Protocol (IP) addresses, browser types, Internet Service Provider (ISP), date and time stamps, referring/exit pages, and possibly the number of clicks. This information is not linked to any personally identifiable information. The purpose of collecting this data is to analyze trends, manage the site, monitor user movement on the website, and gather demographic data.
-            </p>
-        </section>
+            <!-- Main Content -->
+            <div class="md:col-span-9 space-y-10">
+                <!-- Log Files -->
+                <section id="log-files" class="space-y-4 scroll-mt-32">
+                    <h3 class="text-xl font-black text-slate-900 flex items-center gap-3">
+                        <span class="h-6 w-1 bg-blue-600 rounded-full"></span>
+                        Log Files
+                    </h3>
+                    <p class="text-slate-600 text-sm leading-relaxed font-medium">
+                        Like most websites, we use log files to understand how our visitors interact with our site. These files log standard technical data such as IP addresses, browser types, Internet Service Providers (ISP), date/time stamps, and referring/exit pages. This data is **not** linked to any personally identifiable information.
+                    </p>
+                </section>
 
-        <!-- Section: Personal Data We Collect -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-blue-500 mb-4">Personal Data We Collect</h2>
-            <p class="text-xl">
-                We may collect personal data from you when you use our website, including your IP address, browser type, ISP, date and time stamps, referring/exit pages, and other technical information. We also collect information through cookies to enhance your user experience.
-            </p>
-        </section>
+                <!-- Cookies (Essential for Amazon Compliance) -->
+                <section id="cookies" class="space-y-4 scroll-mt-32 p-8 bg-blue-50 rounded-[2rem] border border-blue-100">
+                    <h3 class="text-xl font-black text-blue-900 flex items-center gap-3">
+                        <span class="h-6 w-1 bg-blue-600 rounded-full"></span>
+                        Cookies & Tracking
+                    </h3>
+                    <p class="text-blue-900/70 text-sm leading-relaxed font-medium">
+                        DealsDay24.in uses cookies to store visitor preferences and record session information. This allows us to provide a better user experience and ensure affiliate links function correctly.
+                    </p>
+                    <div class="bg-white/60 p-5 rounded-2xl border border-blue-200/50">
+                        <p class="text-xs font-bold text-blue-800 leading-relaxed italic">
+                            **Third-Party Cookies:** Third-party advertisers, including Amazon and Google, may use cookies and web beacons on our site. They automatically receive your IP address when this happens. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content.
+                        </p>
+                    </div>
+                </section>
 
-        <!-- Section: Legal Basis for Processing Personal Data -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-blue-500 mb-4">Legal Basis for Processing Personal Data</h2>
-            <p class="text-xl">
-                We process your personal data based on legitimate interests to operate and improve our website, your consent for the use of cookies and similar technologies, and compliance with legal obligations.
-            </p>
-        </section>
+                <!-- Advertising Partners -->
+                <section id="advertising" class="space-y-4 scroll-mt-32">
+                    <h3 class="text-xl font-black text-slate-900 flex items-center gap-3">
+                        <span class="h-6 w-1 bg-blue-600 rounded-full"></span>
+                        Advertising Partners
+                    </h3>
+                    <p class="text-slate-600 text-sm leading-relaxed font-medium">
+                        We maintain relationships with several advertising partners. We encourage you to consult the respective Privacy Policies of these third-party ad servers:
+                    </p>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <li>
+                            <a href="https://www.amazon.in/gp/help/customer/display.html?nodeId=201909010" target="_blank" class="flex items-center justify-between p-4 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-all">
+                                <span class="text-sm font-bold text-slate-700">Amazon Privacy Notice</span>
+                                <svg class="h-4 w-4 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-width="3"/></svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://policies.google.com/privacy" target="_blank" class="flex items-center justify-between p-4 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-all">
+                                <span class="text-sm font-bold text-slate-700">Google Privacy & Terms</span>
+                                <svg class="h-4 w-4 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-width="3"/></svg>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
 
-        <!-- Updated Section: Cookies and Similar Technologies -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-blue-500 mb-4">Cookies and Similar Technologies</h2>
-            <p class="text-xl">
-                Like many other websites, DealsDay24.in uses cookies and similar tracking technologies to store information, including visitors' preferences and the pages on the website that the visitor accessed or visited. This information is used to enhance the user experience by customizing our web page content based on visitors’ browser types and/or other information.
-            </p>
-            <p class="text-xl mt-4">
-                <strong>Consent:</strong> You have the right to accept or reject cookies. When you first visit our website, you will be presented with a cookie consent banner providing you with the option to manage your cookie preferences.
-            </p>
-        </section>
+                <!-- Your Rights -->
+                <section id="your-rights" class="space-y-4 scroll-mt-32">
+                    <h3 class="text-xl font-black text-slate-900 flex items-center gap-3">
+                        <span class="h-6 w-1 bg-blue-600 rounded-full"></span>
+                        Your Rights
+                    </h3>
+                    <div class="grid grid-cols-1 gap-3">
+                        <div class="flex items-start gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100">
+                            <span class="h-8 w-8 bg-white rounded-lg flex items-center justify-center text-xs font-bold text-blue-600 shrink-0 shadow-sm">01</span>
+                            <p class="text-sm font-medium text-slate-600">The right to access, update, or delete the information we have on you.</p>
+                        </div>
+                        <div class="flex items-start gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100">
+                            <span class="h-8 w-8 bg-white rounded-lg flex items-center justify-center text-xs font-bold text-blue-600 shrink-0 shadow-sm">02</span>
+                            <p class="text-sm font-medium text-slate-600">The right of rectification – to have your information corrected if it is inaccurate.</p>
+                        </div>
+                        <div class="flex items-start gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100">
+                            <span class="h-8 w-8 bg-white rounded-lg flex items-center justify-center text-xs font-bold text-blue-600 shrink-0 shadow-sm">03</span>
+                            <p class="text-sm font-medium text-slate-600">The right to object to our processing of your personal data.</p>
+                        </div>
+                    </div>
+                </section>
 
-        <!-- Updated Section: Our Advertising Partners and Third-Party Data Sharing -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-blue-500 mb-4">Our Advertising Partners and Third-Party Data Sharing</h2>
-            <p class="text-xl">
-                We partner with third-party advertisers who use cookies and web beacons on our site. Each of our advertising partners has its own Privacy Policy governing the use of user data. For ease of access, we provide hyperlinks to their Privacy Policies below.
-            </p>
-            <p class="text-xl mt-4">
-                These partners may use technologies like cookies, JavaScript, or Web Beacons in their advertisements and links that appear on DealsDay24.in, which are sent directly to your browser. When this occurs, they automatically receive your IP address. These technologies are employed to assess the effectiveness of their advertising campaigns and/or to personalize the advertising content you see on the websites you visit.
-            </p>
-            <p class="text-xl mt-4">
-                Please note that DealsDay24.in does not have access to or control over these cookies that are used by third-party advertisers.
-            </p>
-            <p class="text-xl mt-4">
-                <strong>Advertising Partners' Privacy Policies:</strong>
-            </p>
-            <ul class="list-disc list-inside text-xl mt-4">
-                <li><a href="https://www.google.com/policies/privacy/" class="text-blue-600 hover:underline">Google AdSense</a></li>
-                <li><a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ" class="text-blue-600 hover:underline">Amazon Associates</a></li>
-            </ul>
-        </section>
-
-        <!-- Updated Section: Third-Party Privacy Policies -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-blue-500 mb-4">Third-Party Privacy Policies</h2>
-            <p class="text-xl">
-                The Privacy Policy of DealsDay24.in does not apply to other advertisers or websites. Therefore, we advise you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. These policies may include their practices and instructions on how to opt-out of certain options.
-            </p>
-            <p class="text-xl mt-4">
-                <strong>Your Choices:</strong> You have the option to disable cookies through your individual browser settings. For more detailed information about cookie management with specific web browsers, you can refer to the browsers’ respective websites.
-            </p>
-        </section>
-
-        <!-- Section: Your Rights Under GDPR and CPRA -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-blue-500 mb-4">Your Rights</h2>
-            <p class="text-xl">
-                Under the General Data Protection Regulation (GDPR) and the California Privacy Rights Act (CPRA), you have certain rights regarding your personal data:
-            </p>
-            <ul class="list-disc list-inside text-xl mt-4">
-                <li><strong>Right to Access:</strong> You have the right to request copies of your personal data.</li>
-                <li><strong>Right to Rectification:</strong> You have the right to request that we correct any information you believe is inaccurate or incomplete.</li>
-                <li><strong>Right to Erasure:</strong> You have the right to request that we erase your personal data, under certain conditions.</li>
-                <li><strong>Right to Restrict Processing:</strong> You have the right to request that we restrict the processing of your personal data, under certain conditions.</li>
-                <li><strong>Right to Data Portability:</strong> You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.</li>
-                <li><strong>Right to Object to Processing:</strong> You have the right to object to our processing of your personal data, under certain conditions.</li>
-                <li><strong>Right to Opt-Out of Sale or Sharing:</strong> Under CPRA, you have the right to opt-out of the sale or sharing of your personal information.</li>
-            </ul>
-            <p class="text-xl mt-4">
-                To exercise any of these rights, please contact us using the contact information provided above. We will respond to your request within the time frame required by law.
-            </p>
-        </section>
-
-        <!-- Section: Data Retention -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-blue-500 mb-4">Data Retention</h2>
-            <p class="text-xl">
-                We will retain your personal data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use your data to the extent necessary to comply with our legal obligations, resolve disputes, and enforce our policies.
-            </p>
-        </section>
-
-        <!-- Section: Security of Your Personal Data -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-blue-500 mb-4">Security of Your Personal Data</h2>
-            <p class="text-xl">
-                We take the security of your personal data seriously and implement reasonable administrative, technical, and physical safeguards to protect it from unauthorized access, use, alteration, and disclosure.
-            </p>
-        </section>
-
-        <!-- Updated Section: Children’s Privacy -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-blue-500 mb-4">Children’s Privacy</h2>
-            <p class="text-xl">
-                Protecting the privacy of children is especially important. We encourage parents and guardians to observe, participate in, and/or monitor and guide their children's online activity.
-            </p>
-            <p class="text-xl mt-4">
-                DealsDay24.in does not knowingly collect any Personal Identifiable Information from children under the age of 16. If you believe that your child provided this type of information on our website, we strongly encourage you to contact us immediately, and we will make every effort to promptly remove such information from our records.
-            </p>
-        </section>
-
-        <!-- Section: International Data Transfers -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-blue-500 mb-4">International Data Transfers</h2>
-            <p class="text-xl">
-                Your information, including personal data, may be transferred to—and maintained on—computers located outside of your state, province, country, or other governmental jurisdiction where the data protection laws may differ. By using our website, you consent to the transfer of your data to such jurisdictions.
-            </p>
-        </section>
-
-        <!-- Section: Changes to This Privacy Policy -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-blue-500 mb-4">Changes to This Privacy Policy</h2>
-            <p class="text-xl">
-                We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page with an updated revision date. We encourage you to review this Privacy Policy periodically for any changes.
-            </p>
-        </section>
-
-        <!-- Updated Section: Consent -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-blue-500 mb-4">Your Consent</h2>
-            <p class="text-xl">
-                By using our website, you hereby consent to our Privacy Policy and agree to its Terms and Conditions. If you do not agree with this Privacy Policy, please do not use our website.
-            </p>
-        </section>
-
-        <!-- Section: Contact Us -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-blue-500 mb-4">Contact Us</h2>
-            <p class="text-xl">
-                If you have any questions or concerns about this Privacy Policy, please contact us:
-            </p>
-            <p class="text-xl mt-4">
-                Email: <a href="mailto:info@dealsday24.in" class="text-blue-600 hover:underline">info@dealsday24.in</a><br>
-                Address: Pitanali, Odisha 768106, India
-            </p>
-        </section>
+                <!-- Contact Info -->
+                <section class="p-8 bg-slate-900 rounded-[2.5rem] text-center space-y-4 shadow-xl shadow-slate-200">
+                    <h3 class="text-white font-bold">Privacy Questions?</h3>
+                    <p class="text-slate-400 text-sm">If you have any questions about this Privacy Policy, please contact us at:</p>
+                    <a href="mailto:info@dealsday24.in" class="inline-block px-6 py-3 bg-blue-600 text-white font-black rounded-xl hover:bg-blue-500 transition-colors">
+                        info@dealsday24.in
+                    </a>
+                </section>
+            </div>
+        </div>
     </div>
 </div>

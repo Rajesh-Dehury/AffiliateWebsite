@@ -1,158 +1,181 @@
-<div x-data="{ isOpenFilter: false }" class="p-5">
-    <div class="flex justify-end mb-3 space-x-2">
-        <!-- Search Input (Mobile) -->
-        <input wire:model.live="search" type="text" class="w-full md:hidden py-2 px-4 text-gray-700 bg-white border border-blue-500 rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300" placeholder="Search products...">
-
-        <!-- Filter Button (Mobile) -->
-        <div class="block md:hidden">
-            <button @click="isOpenFilter = true" class="text-blue-500 bg-white p-3 rounded-lg shadow border border-blue-400" aria-label="Open Filters">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707l-5 5a1 1 0 00-.293.707v4.586a1 1 0 01-.293.707l-2 2A1 1 0 0110 21v-6.586a1 1 0 00-.293-.707l-5-5A1 1 0 014 6V4z" />
-                </svg>
-            </button>
-        </div>
-
-        <!-- Clear Filters Button (Mobile) -->
-        <div class="block md:hidden">
-            <button wire:click="clearFilters" class="text-blue-500 bg-white p-3 rounded-lg shadow border border-blue-400" aria-label="Clear Filters">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                </svg>
-            </button>
-        </div>
+<div x-data="{ isOpenFilter: false }" class="space-y-8">
+    <!-- Hero / Header Section -->
+    <div class="text-center space-y-4 mb-10">
+        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
+            Handpicked <span class="gradient-text">Premium Deals</span>
+        </h1>
+        <p class="text-slate-500 max-w-2xl mx-auto text-sm md:text-base font-medium">
+            Discover massive discounts on top-rated Amazon products. Updated every hour just for you.
+        </p>
     </div>
 
-    <div class="grid grid-cols-12">
-        <!-- Filter Menu -->
-        <aside x-cloak :class="{'translate-x-0': isOpenFilter, 'translate-x-full': !isOpenFilter}" class="col-span-3 md:col-span-3 fixed inset-y-0 right-0 bg-white z-50 px-5 transition-transform duration-300 transform md:translate-x-0 md:relative md:z-auto md:bg-transparent" aria-labelledby="filters-heading">
-            <div :class="{'shadow-lg': !isOpenFilter}" class="p-5 bg-white rounded-lg">
-                <div class="flex items-center justify-between mb-3">
-                    <h2 id="filters-heading" class="text-2
-                    <h2 id=" filters-heading" class="text-2xl font-semibold">Filters</h2>
-                    <div>
-                        <button @click="isOpenFilter = false" :class="{'hidden': !isOpenFilter}" class="text-red-50 bg-red-500 p-2 rounded-lg shadow border border-red-400" aria-label="Close Filters">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                            </svg>
-                        </button>
-                        <button wire:click="clearFilters" class="text-blue-500 bg-white p-2 rounded-lg shadow border border-blue-400" aria-label="Clear All Filters">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                            </svg>
-                        </button>
-                    </div>
+    <!-- Search and Filter Bar -->
+    <div class="sticky top-20 z-40 glass-card p-3 rounded-2xl shadow-sm border border-slate-200/60 mb-8">
+        <div class="flex flex-col md:flex-row gap-3">
+            <!-- Search -->
+            <div class="relative flex-grow">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
                 </div>
+                <input wire:model.live.debounce.300ms="search" type="text" 
+                       class="block w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200" 
+                       placeholder="Search for products, brands or categories...">
+            </div>
 
-                <!-- Search Field in Filters Menu -->
-                <div :class="{'hidden': isOpenFilter}" class="mb-3">
-                    <input wire:model.live="search" type="text" class="w-full py-2 px-4 text-gray-700 bg-white border border-blue-500 rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300" placeholder="Search products...">
-                </div>
+            <!-- Action Buttons -->
+            <div class="flex gap-2">
+                <button @click="isOpenFilter = !isOpenFilter" 
+                        class="flex items-center gap-2 px-5 py-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 hover:bg-slate-50 transition-all duration-200 shadow-sm">
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707l-5 5a1 1 0 00-.293.707v4.586a1 1 0 01-.293.707l-2 2A1 1 0 0110 21v-6.586a1 1 0 00-.293-.707l-5-5A1 1 0 014 6V4z" />
+                    </svg>
+                    <span>Filters</span>
+                    @if($disc > 0 || $date_from || $date_to)
+                        <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+                    @endif
+                </button>
+                <button wire:click="clearFilters" 
+                        class="p-3 bg-white border border-slate-200 rounded-xl text-slate-500 hover:text-red-600 hover:bg-red-50 transition-all duration-200 shadow-sm"
+                        title="Clear Filters">
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
 
-                <!-- Date Range Filter -->
-                <div class="mb-3">
-                    <div class="mb-2">
-                        <label for="date_from">Date From</label>
-                        <input wire:model.live="date_from" id="date_from" type="date" class="w-full py-2 px-4 text-gray-700 bg-white border border-blue-500 rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300">
-                    </div>
-                    <div>
-                        <label for="date_to">Date To</label>
-                        <input wire:model.live="date_to" id="date_to" type="date" class="w-full py-2 px-4 text-gray-700 bg-white border border-blue-500 rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300">
+        <!-- Expanded Filters -->
+        <div x-cloak x-show="isOpenFilter" x-collapse>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 pb-2 border-t border-slate-100 mt-4">
+                <!-- Date Filter -->
+                <div class="space-y-3">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-wider">Date Range</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <input wire:model.live="date_from" type="date" class="block w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        <input wire:model.live="date_to" type="date" class="block w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                     </div>
                 </div>
 
                 <!-- Discount Filter -->
-                <div class="mb-3">
-                    <label for="discount">Discount ({{$disc}}%)</label>
-                    <input wire:model.live="disc" id="discount" type="range" class="w-full">
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wider">Minimum Discount</label>
+                        <span class="text-sm font-bold text-blue-600">{{ $disc }}% OFF</span>
+                    </div>
+                    <input wire:model.live="disc" type="range" min="0" max="90" step="5" 
+                           class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
                 </div>
-            </div>
-        </aside>
 
-        <!-- Main Content -->
-        <div class="col-span-12 md:col-span-9">
-            <div class="grid grid-cols-12 gap-4">
-                @forelse($records as $record)
-                <article class="bg-white col-span-12 md:col-span-4 rounded-xl shadow-lg">
-                    <div class="relative">
-                        <!-- Product Time and Discount Labels -->
-                        <p class="text-xs bg-gray-700 text-white rounded-tl-lg absolute top-0 left-0 px-2 py-1.5" wire:ignore>{{$record->updated_at->diffForHumans();}}</p>
-                        @if($record->saving_percent)
-                        <p class="text-xs bg-red-700 text-white rounded-tr-lg absolute top-0 right-0 px-2 py-1.5">UP TO {{$record->saving_percent}}% OFF</p>
-                        @endif
-
-                        <!-- Product Image -->
-                        <img src="{{$record->primary_large_url}}" alt="{{ $record->product_title }}" class="h-60 w-full rounded-lg object-contain" loading="lazy">
-
-                        <!-- Product Title Overlay -->
-                        <div class="h-24 w-full bg-gradient-to-t from-gray-800 bottom-0 rounded-t-lg">
-                            <div class="absolute bottom-2 px-3">
-                                <h3 class="text-sm mb-1 text-white">{{\Str::limit($record->product_title,70)}}</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Actions -->
-                    <div class="grid grid-cols-2">
-                        <a wire:navigate href="{{route('details',$record->id)}}" class="col-span-1 text-center py-3 bg-blue-600 rounded-bl-lg text-white font-semibold">Details</a>
-                        <a href="{{$record->our_link}}" target="_blank" class="col-span-1 text-center py-3 bg-gray-50 rounded-br-lg font-semibold" rel="nofollow noopener noreferrer">Check Now</a>
-                    </div>
-                </article>
-                @empty
-                <p>No products found.</p>
-                @endforelse
-                @if($records->hasMorePages())
-                <div wire:loading wire:target="loadMore" class="bg-white border p-1 col-span-12 md:col-span-4 rounded-xl animate-pulse">
-                    <div class="relative">
-                        <div class="bg-gray-300 h-4 w-20 absolute top-0 left-0 rounded-tl-lg"></div>
-                        <div class="bg-gray-300 h-4 w-24 absolute top-0 right-0 rounded-tr-lg"></div>
-                        <div class="bg-gray-300 h-60 w-full rounded-lg"></div>
-                        <div class="bg-gray-400 h-24 w-full rounded-lg mt-2"></div>
-                    </div>
-                    <div class="mt-3 bg-gray-300 h-6 w-1/2 rounded-lg"></div>
-                    <div class="flex my-2 space-x-2">
-                        <div class="bg-gray-300 h-8 w-1/2 rounded-lg"></div>
-                        <div class="bg-gray-300 h-8 w-1/2 rounded-lg"></div>
-                    </div>
+                <!-- Quick Stats / Info -->
+                <div class="flex items-center justify-center md:justify-end">
+                    <p class="text-xs text-slate-400 italic">Showing {{ $records->count() }} of total results</p>
                 </div>
-                <div wire:loading wire:target="loadMore" class="bg-white border p-1 col-span-12 md:col-span-4 rounded-xl animate-pulse">
-                    <div class="relative">
-                        <div class="bg-gray-300 h-4 w-20 absolute top-0 left-0 rounded-tl-lg"></div>
-                        <div class="bg-gray-300 h-4 w-24 absolute top-0 right-0 rounded-tr-lg"></div>
-                        <div class="bg-gray-300 h-60 w-full rounded-lg"></div>
-                        <div class="bg-gray-400 h-24 w-full rounded-lg mt-2"></div>
-                    </div>
-                    <div class="mt-3 bg-gray-300 h-6 w-1/2 rounded-lg"></div>
-                    <div class="flex my-2 space-x-2">
-                        <div class="bg-gray-300 h-8 w-1/2 rounded-lg"></div>
-                        <div class="bg-gray-300 h-8 w-1/2 rounded-lg"></div>
-                    </div>
-                </div>
-                <div wire:loading wire:target="loadMore" class="bg-white border p-1 col-span-12 md:col-span-4 rounded-xl animate-pulse">
-                    <div class="relative">
-                        <div class="bg-gray-300 h-4 w-20 absolute top-0 left-0 rounded-tl-lg"></div>
-                        <div class="bg-gray-300 h-4 w-24 absolute top-0 right-0 rounded-tr-lg"></div>
-                        <div class="bg-gray-300 h-60 w-full rounded-lg"></div>
-                        <div class="bg-gray-400 h-24 w-full rounded-lg mt-2"></div>
-                    </div>
-                    <div class="mt-3 bg-gray-300 h-6 w-1/2 rounded-lg"></div>
-                    <div class="flex my-2 space-x-2">
-                        <div class="bg-gray-300 h-8 w-1/2 rounded-lg"></div>
-                        <div class="bg-gray-300 h-8 w-1/2 rounded-lg"></div>
-                    </div>
-                </div>
-                @endif
-            </div>
-            <div class="flex justify-center mt-10 mb-6">
-                <p class="py-2 bg-blue-500 rounded-3xl px-10 shadow-xl text-white cursor-pointer" wire:click="loadMore">Load more</p>
             </div>
         </div>
     </div>
 
-    <!-- <script>
-        document.addEventListener('scroll', function() {
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-                @this.call('loadMore');
-            }
-        });
-    </script> -->
+    <!-- Deals Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        @forelse($records as $record)
+            <article class="group bg-white rounded-3xl overflow-hidden deal-shadow border border-slate-100 flex flex-col h-full">
+                <!-- Image Container -->
+                <div class="relative pt-[80%] bg-slate-50 overflow-hidden">
+                    <img src="{{$record->primary_large_url}}" 
+                         alt="{{ $record->product_title }}" 
+                         class="absolute inset-0 w-full h-full object-contain p-6 transform group-hover:scale-110 transition-transform duration-500"
+                         loading="lazy">
+                    
+                    <!-- Labels -->
+                    <div class="absolute top-4 left-4 flex flex-col gap-2">
+                        <span class="px-3 py-1 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold rounded-lg tracking-wider uppercase">
+                            {{$record->updated_at->diffForHumans(null, true)}} ago
+                        </span>
+                        @if($record->saving_percent)
+                            <span class="px-3 py-1 bg-red-600 text-white text-[10px] font-extrabold rounded-lg tracking-wider uppercase shadow-lg shadow-red-200">
+                                {{ $record->saving_percent }}% OFF
+                            </span>
+                        @endif
+                    </div>
+                    
+                    <!-- Quick Preview Overlay -->
+                    <div class="absolute inset-0 bg-slate-900/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+
+                <!-- Content -->
+                <div class="p-5 flex flex-col flex-grow space-y-4">
+                    <div class="flex-grow">
+                        <h3 class="text-sm font-bold text-slate-800 line-clamp-2 leading-snug group-hover:text-blue-600 transition-colors">
+                            {{ $record->product_title }}
+                        </h3>
+                    </div>
+
+                    <!-- Price Info -->
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-xl font-black text-slate-900">{{ $record->offer_price }}</span>
+                        @if($record->mrp)
+                            <span class="text-sm text-slate-400 line-through decoration-red-400/50">{{ $record->mrp }}</span>
+                        @endif
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="grid grid-cols-2 gap-2 pt-2">
+                        <a wire:navigate href="{{ route('details', $record->slug ?? $record->id) }}" 
+                           class="flex items-center justify-center py-3 text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all duration-200">
+                            View Details
+                        </a>
+                        <a href="{{ $record->our_link }}" target="_blank" rel="nofollow"
+                           class="flex items-center justify-center py-3 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-lg shadow-blue-100 transition-all duration-200">
+                            Grab Deal
+                        </a>
+                    </div>
+                </div>
+            </article>
+        @empty
+            <div class="col-span-full py-20 text-center space-y-4">
+                <div class="inline-flex items-center justify-center h-20 w-20 bg-slate-100 rounded-full text-slate-300 mb-4">
+                    <svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800">No deals found matching your search</h3>
+                <p class="text-slate-500">Try adjusting your filters or search keywords.</p>
+                <button wire:click="clearFilters" class="text-blue-600 font-bold hover:underline">Clear all filters</button>
+            </div>
+        @endforelse
+    </div>
+
+    <!-- Loading Skeleton (visible during loadMore) -->
+    <div wire:loading wire:target="loadMore" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        @foreach(range(1, 4) as $i)
+            <div class="bg-white rounded-3xl p-1 animate-pulse border border-slate-100">
+                <div class="bg-slate-100 h-60 rounded-2xl mb-4"></div>
+                <div class="px-4 pb-4 space-y-3">
+                    <div class="h-4 bg-slate-100 rounded w-3/4"></div>
+                    <div class="h-4 bg-slate-100 rounded w-1/2"></div>
+                    <div class="flex gap-2 pt-2">
+                        <div class="h-10 bg-slate-100 rounded-xl w-1/2"></div>
+                        <div class="h-10 bg-slate-100 rounded-xl w-1/2"></div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
+    <!-- Load More -->
+    @if($records->hasMorePages())
+        <div class="flex justify-center pt-12">
+            <button wire:click="loadMore" 
+                    wire:loading.attr="disabled"
+                    class="group relative inline-flex items-center gap-3 px-12 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-all duration-300 shadow-xl shadow-slate-200">
+                <span wire:loading.remove wire:target="loadMore">Browse More Deals</span>
+                <span wire:loading wire:target="loadMore">Hunting for more...</span>
+                <svg wire:loading.remove wire:target="loadMore" 
+                     class="h-5 w-5 transform group-hover:translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </button>
+        </div>
+    @endif
 </div>

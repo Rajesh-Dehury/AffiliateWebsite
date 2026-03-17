@@ -1,59 +1,91 @@
-<div class="bg-gray-200 text-gray-800 font-sans leading-relaxed">
-    <div class="max-w-5xl mx-auto p-8">
-        <h1 class="text-5xl font-bold text-blue-600 mb-8">Disclaimer</h1>
+<div class="max-w-5xl mx-auto space-y-12">
+    <!-- Header Section -->
+    <header class="text-center space-y-4 py-10">
+        <h1 class="text-4xl md:text-6xl font-black tracking-tight text-slate-900">
+            Legal <span class="gradient-text">Disclaimer</span>
+        </h1>
+        <p class="text-slate-500 max-w-2xl mx-auto text-lg font-medium">
+            Important information about our affiliate relationships and content accuracy.
+        </p>
+    </header>
 
-        <section class="mb-8">
-            <p class="text-xl mb-4">
-                For any inquiries or questions regarding DealsDay24.in, feel free to contact us at <a href="mailto:dealsday1239@gmail.com" class="text-blue-600 hover:underline">dealsday1239@gmail.com</a>.
-            </p>
-        </section>
+    <!-- Amazon Associate Disclosure (Crucial for Amazon Compliance) -->
+    <section class="bg-blue-600 rounded-[2.5rem] p-8 md:p-12 text-white shadow-xl shadow-blue-100 relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-10 opacity-10">
+            <svg class="h-48 w-48 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L1 21h22L12 2zm0 3.45l8.15 14.1H3.85L12 5.45z"/>
+            </svg>
+        </div>
+        <div class="relative z-10 flex flex-col md:flex-row items-center gap-8">
+            <div class="h-20 w-20 shrink-0 bg-white/20 backdrop-blur-md rounded-3xl flex items-center justify-center">
+                <svg class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <div class="space-y-4 text-center md:text-left">
+                <h2 class="text-2xl font-black">Amazon Associate Disclosure</h2>
+                <p class="text-blue-50 text-lg leading-relaxed font-medium">
+                    DealsDay24.in is a participant in the <span class="font-bold border-b-2 border-white/30">Amazon Services LLC Associates Program</span>, an affiliate advertising program designed to provide a way for websites to earn advertising fees by advertising and linking to Amazon.in. 
+                </p>
+                <p class="text-white font-bold italic bg-white/10 inline-block px-4 py-2 rounded-xl border border-white/20">
+                    "As an Amazon Associate, I earn from qualifying purchases."
+                </p>
+            </div>
+        </div>
+    </section>
 
-        <section class="mb-8">
-            <p class="text-xl mb-4">
-                DealsDay24.in participates in the <strong>Amazon Services LLC Associates Program</strong>, an affiliate advertising program designed to provide a way for websites to earn fees by advertising and linking to Amazon.com. As an <strong>Amazon Associate</strong>, we earn from qualifying purchases. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates.
+    <!-- Detailed Disclaimer Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Content Accuracy -->
+        <div class="glass-card p-8 rounded-[2rem] border border-slate-100 shadow-sm space-y-4">
+            <h3 class="text-xl font-black text-slate-900 flex items-center gap-2">
+                <span class="h-6 w-1 bg-blue-600 rounded-full"></span>
+                Content Accuracy
+            </h3>
+            <p class="text-slate-600 text-sm leading-relaxed font-medium">
+                While we strive to provide the most accurate and up-to-date information, product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on Amazon.in at the time of purchase will apply to the purchase of this product.
             </p>
-        </section>
+        </div>
 
-        <section class="mb-8">
-            <p class="text-xl mb-4">
-                DealsDay24.in contains links to other third-party websites. We do not control or endorse the content of these external sites, and we are not responsible for their accuracy. While we strive to ensure that the deals and offers listed on our site are up to date, we cannot be held responsible for external content.
+        <!-- External Links -->
+        <div class="glass-card p-8 rounded-[2rem] border border-slate-100 shadow-sm space-y-4">
+            <h3 class="text-xl font-black text-slate-900 flex items-center gap-2">
+                <span class="h-6 w-1 bg-blue-600 rounded-full"></span>
+                External Links
+            </h3>
+            <p class="text-slate-600 text-sm leading-relaxed font-medium">
+                Our website contains links to external sites that are not operated by us. We have no control over the content and practices of these sites, and cannot accept responsibility or liability for their respective policies. Users are encouraged to read the terms and privacy policies of any third-party site.
             </p>
-        </section>
+        </div>
 
-        <section class="mb-8">
-            <p class="text-xl mb-4">
-                By using these third-party links, you do so at your own risk. We encourage you to review the <strong>Privacy Policy</strong> and <strong>Terms & Conditions</strong> of any website you visit before sharing any personal information.
+        <!-- No Direct Sales -->
+        <div class="glass-card p-8 rounded-[2rem] border border-slate-100 shadow-sm space-y-4">
+            <h3 class="text-xl font-black text-slate-900 flex items-center gap-2">
+                <span class="h-6 w-1 bg-blue-600 rounded-full"></span>
+                No Direct Sales
+            </h3>
+            <p class="text-slate-600 text-sm leading-relaxed font-medium">
+                DealsDay24.in is not an e-commerce platform or a seller. We act as a bridge between users and retailers. We are not responsible for order fulfillment, shipping, product quality, or payment processing. All such issues should be directed to the retailer.
             </p>
-        </section>
+        </div>
 
-        <section class="mb-8">
-            <p class="text-xl mb-4">
-                DealsDay24.in is not a seller or e-commerce platform. We act as a gateway to deals, offers, and products provided by other websites. Therefore, we are not responsible for transactions, shipping, or product quality. Please review the respective website's terms before making any purchase.
+        <!-- Trademarks -->
+        <div class="glass-card p-8 rounded-[2rem] border border-slate-100 shadow-sm space-y-4">
+            <h3 class="text-xl font-black text-slate-900 flex items-center gap-2">
+                <span class="h-6 w-1 bg-blue-600 rounded-full"></span>
+                Trademarks
+            </h3>
+            <p class="text-slate-600 text-sm leading-relaxed font-medium">
+                Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. All other product names, logos, and brands are the property of their respective owners and are used for identification purposes only.
             </p>
-        </section>
-
-        <section class="mb-8">
-            <p class="text-xl mb-4">
-                We do not guarantee the accuracy, availability, or quality of any products or services from external websites. If you encounter issues with a transaction, please resolve them directly with the respective website or vendor.
-            </p>
-        </section>
-
-        <section class="mb-8">
-            <p class="text-xl mb-4">
-                DealsDay24.in aims to present reliable and updated information. We welcome user feedback and encourage you to notify us of any discrepancies, so we can correct them promptly.
-            </p>
-        </section>
-
-        <section class="mb-8">
-            <p class="text-xl mb-4">
-                We take precautions to avoid conflicts of interest. If you experience any issues with the deals or offers listed on our site, please reach out to <a href="mailto:dealsday1239@gmail.com" class="text-blue-600 hover:underline">dealsday1239@gmail.com</a>, and we will address the issue promptly.
-            </p>
-        </section>
-
-        <section class="mb-8">
-            <p class="text-xl mb-4">
-                All product names, logos, and brands featured on DealsDay24.in are the property of their respective owners. These names are used solely for identification and promotional purposes.
-            </p>
-        </section>
+        </div>
     </div>
+
+    <!-- Contact Info -->
+    <section class="text-center py-10">
+        <p class="text-slate-500 font-medium">
+            Have questions regarding this disclaimer? <br>
+            Email us at <a href="mailto:dealsday1239@gmail.com" class="text-blue-600 font-bold hover:underline">dealsday1239@gmail.com</a>
+        </p>
+    </section>
 </div>

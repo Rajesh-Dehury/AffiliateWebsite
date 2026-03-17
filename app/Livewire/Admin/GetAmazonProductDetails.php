@@ -323,7 +323,7 @@ class GetAmazonProductDetails extends Component
         $count = AmazonDeals::where('slug', 'LIKE', "{$slug}%")->count();
         $finalSlug = $count ? "{$slug}-{$count}" : $slug;
 
-        AmazonDeals::updateOrCreate(
+        $deal = AmazonDeals::updateOrCreate(
             ['product_asin' => $this->product_asin],
             [
                 'product_asin' => $this->product_asin,
@@ -343,6 +343,22 @@ class GetAmazonProductDetails extends Component
                 'our_post' => $this->our_post,
             ]
         );
+
+        // Log Price History if offer_price is present
+        if ($this->offer_price) {
+            // Clean price string (e.g., "₹1,299.00" -> 1299.00)
+            $numericPrice = (float) preg_replace('/[^0-9.]/', '', $this->offer_price);
+            
+            // Only log if price is different from last recorded or no history exists
+            $lastHistory = \App\Models\PriceHistory::where('amazon_deal_id', $deal->id)->latest()->first();
+            if (!$lastHistory || (float)$lastHistory->price !== $numericPrice) {
+                \App\Models\PriceHistory::create([
+                    'amazon_deal_id' => $deal->id,
+                    'price' => $numericPrice
+                ]);
+            }
+        }
+
         Session::flash('success', 'Posted to DealsDay24.in');
     }
 }

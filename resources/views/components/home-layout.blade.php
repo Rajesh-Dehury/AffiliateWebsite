@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -39,12 +39,51 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('favicon-16x16.png')}}">
     <link rel="manifest" href="{{asset('site.webmanifest')}}">
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <!-- Vite CSS -->
     @vite('resources/css/app.css')
 
     <style>
-        [x-cloak] {
-            display: none !important;
+        [x-cloak] { display: none !important; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3External%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-blend-mode: overlay;
+            background-attachment: fixed;
+            opacity: 0.98;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .deal-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .deal-shadow:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(-4px);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-glow:hover {
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
         }
     </style>
 
@@ -55,26 +94,27 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
-<body class="bg-gray-100 h-screen font-sans">
+<body class="antialiased text-gray-900">
     <!-- Navigation -->
     <x-home-top-nav />
 
-    <div class="min-h-screen">
-        <div class="pt-20 md:pt-0">
+    <main class="min-h-screen pt-24 pb-12">
+        <div class="container mx-auto px-4 lg:px-8">
             {{$slot}}
         </div>
-    </div>
+    </main>
 
-    <!-- WhatsApp and Telegram Floating Icons -->
-    <div class="fixed bottom-4 right-4 flex flex-col space-y-3">
-        <!-- WhatsApp Icon -->
-        <a href="https://wa.me/+916371391755" target="_blank" class="bg-green-500 p-2.5 rounded-full shadow-lg hover:bg-green-600 hover:drop-shadow-lg hover:shadow-green-300 transition duration-300">
-            <img src="{{asset('whatsapp-svgrepo-com.svg')}}" alt="WhatsApp" class="h-10 w-10 transition duration-300">
+    <!-- Floating Actions -->
+    <div class="fixed bottom-6 right-6 flex flex-col space-y-4 z-50">
+        <!-- Telegram -->
+        <a href="https://t.me/DealsDay_24" target="_blank" 
+           class="bg-blue-500 p-3 rounded-full shadow-lg hover:bg-blue-600 transition-all duration-300 transform hover:scale-110 btn-glow">
+            <img src="{{asset('telegram-svgrepo-com.svg')}}" alt="Telegram" class="h-8 w-8">
         </a>
-
-        <!-- Telegram Icon -->
-        <a href="https://t.me/DealsDay_24" target="_blank" class="bg-blue-500 p-2.5 rounded-full shadow-lg hover:bg-blue-600 hover:drop-shadow-lg hover:shadow-blue-300 transition duration-300">
-            <img src="{{asset('telegram-svgrepo-com.svg')}}" alt="Telegram" class="h-10 w-10">
+        <!-- WhatsApp -->
+        <a href="https://wa.me/+916371391755" target="_blank" 
+           class="bg-green-500 p-3 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 transform hover:scale-110 btn-glow">
+            <img src="{{asset('whatsapp-svgrepo-com.svg')}}" alt="WhatsApp" class="h-8 w-8">
         </a>
     </div>
 
@@ -83,58 +123,26 @@
 
     <!-- jQuery and Select2 JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    @stack('js')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <!-- CookieConsent JS -->
     <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
 
-    <!-- Initialize CookieConsent -->
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-
         window.addEventListener("load", function(){
             window.cookieconsent.initialise({
                 "palette": {
-                    "popup": {
-                        "background": "#000"
-                    },
-                    "button": {
-                        "background": "#f1d600"
-                    }
+                    "popup": { "background": "#0f172a", "text": "#f8fafc" },
+                    "button": { "background": "#2563eb", "text": "#ffffff" }
                 },
                 "theme": "classic",
-                "position": "bottom",
-                "type": "opt-in",
+                "position": "bottom-right",
                 "content": {
-                    "message": "We use cookies to ensure you get the best experience on our website.",
-                    "allow": "Accept",
-                    "deny": "Decline",
-                    "link": "Learn more",
-                    "href": "/privacy"  // Update with the path to your privacy policy
-                },
-                onInitialise: function (status) {
-                    var didConsent = this.hasConsented();
-                    if (didConsent) {
-                        // Enable Google Analytics
-                        gtag('js', new Date());
-                        gtag('config', 'G-GBE4QW6W7F');
-                    }
-                },
-                onStatusChange: function(status, chosenBefore) {
-                    var didConsent = this.hasConsented();
-                    if (didConsent) {
-                        // Enable Google Analytics
-                        gtag('js', new Date());
-                        gtag('config', 'G-GBE4QW6W7F');
-                    } else {
-                        // Disable Google Analytics
-                        // Optional: Remove existing GA cookies
-                    }
-                },
-                onRevokeChoice: function() {
-                    // Disable Google Analytics
-                    // Optional: Remove existing GA cookies
+                    "message": "We use cookies to enhance your deal-hunting experience.",
+                    "dismiss": "Got it!",
+                    "link": "Privacy Policy",
+                    "href": "/privacy"
                 }
             })
         });
