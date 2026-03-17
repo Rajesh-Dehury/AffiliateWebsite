@@ -21,10 +21,12 @@ class PostDetails extends Component
     public $our_link;
     public $wp_post;
     public $our_post;
+    public $priceHistory;
 
     public function mount($id)
     {
         $this->postDetail = AmazonDeals::find($id);
+        $this->priceHistory = \App\Models\PriceHistory::where('amazon_deal_id', $id)->orderBy('created_at', 'desc')->get();
 
         $this->product_asin = $this->postDetail->product_asin;
         $this->detail_page_url = $this->postDetail->detail_page_url;

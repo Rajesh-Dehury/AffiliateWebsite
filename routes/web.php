@@ -55,6 +55,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/all/posts', AllPosts::class)->name('admin.all.posts');
     Route::get('admin/{id}/post', AdminPostDetails::class)->name('admin.post');
     Route::get('admin/settings', SettingUpdate::class)->name('admin.settings');
+    Route::get('admin/subscriptions', \App\Livewire\Admin\Subscriptions::class)->name('admin.subscriptions');
     Route::get('admin/logout', function () {
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');

@@ -32,6 +32,16 @@ class SettingUpdate extends Component
         session()->flash('message', 'Telegram link updated successfully.');
     }
 
+    public function generateSitemap()
+    {
+        try {
+            \Illuminate\Support\Facades\Artisan::call('sitemap:generate');
+            session()->flash('message', 'Sitemap generated successfully!');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error generating sitemap: ' . $e->getMessage());
+        }
+    }
+
     public function render()
     {
         return view('livewire.admin.setting-update')->layout('components.admin-layout');
