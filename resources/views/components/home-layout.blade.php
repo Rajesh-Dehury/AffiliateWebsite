@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4530205480687340"
+     crossorigin="anonymous"></script>
+    
     <!-- Title Tag for SEO -->
     <title>DealsDay24 - Best Deals and Offers on E-Commerce Sites in India</title>
 
     <!-- Meta Description for SEO -->
     <meta name="description" content="Find the latest and best deals, offers, and discounts on leading e-commerce sites in India like Amazon, Flipkart, and more. Save big on your favorite products.">
-
+    
     <!-- Meta Keywords for SEO -->
     <meta name="keywords" content="Deals, Offers, Discounts, Amazon, Flipkart, E-commerce, Best Deals India, Online Shopping, DealsDay24">
 
@@ -45,14 +47,17 @@
         }
     </style>
 
-    <!-- jQuery and Select2 JS/CSS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- CookieConsent CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+    <!-- jQuery and Select2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body class="bg-gray-100 h-screen font-sans">
+    <!-- Navigation -->
     <x-home-top-nav />
+
     <div class="min-h-screen">
         <div class="pt-20 md:pt-0">
             {{$slot}}
@@ -74,6 +79,65 @@
 
     <!-- Footer Component -->
     <x-home-footer />
+
+    <!-- jQuery and Select2 JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <!-- CookieConsent JS -->
+    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+
+    <!-- Initialize CookieConsent -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+
+        window.addEventListener("load", function(){
+            window.cookieconsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#000"
+                    },
+                    "button": {
+                        "background": "#f1d600"
+                    }
+                },
+                "theme": "classic",
+                "position": "bottom",
+                "type": "opt-in",
+                "content": {
+                    "message": "We use cookies to ensure you get the best experience on our website.",
+                    "allow": "Accept",
+                    "deny": "Decline",
+                    "link": "Learn more",
+                    "href": "/privacy"  // Update with the path to your privacy policy
+                },
+                onInitialise: function (status) {
+                    var didConsent = this.hasConsented();
+                    if (didConsent) {
+                        // Enable Google Analytics
+                        gtag('js', new Date());
+                        gtag('config', 'G-GBE4QW6W7F');
+                    }
+                },
+                onStatusChange: function(status, chosenBefore) {
+                    var didConsent = this.hasConsented();
+                    if (didConsent) {
+                        // Enable Google Analytics
+                        gtag('js', new Date());
+                        gtag('config', 'G-GBE4QW6W7F');
+                    } else {
+                        // Disable Google Analytics
+                        // Optional: Remove existing GA cookies
+                    }
+                },
+                onRevokeChoice: function() {
+                    // Disable Google Analytics
+                    // Optional: Remove existing GA cookies
+                }
+            })
+        });
+    </script>
 </body>
 
 </html>

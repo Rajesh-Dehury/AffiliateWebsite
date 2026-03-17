@@ -32,6 +32,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/landing/page', function () {
+    return view('landing_page');
+});
 Route::get('/', Home::class)->name('home');
 Route::get('/about', AboutUs::class)->name('about');
 Route::get('/privacy', Privacy::class)->name('privacy');
