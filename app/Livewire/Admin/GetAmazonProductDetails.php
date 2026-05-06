@@ -296,9 +296,25 @@ class GetAmazonProductDetails extends Component
             // If ASIN is still not found, attempt to scrape it from the page
             if (!$this->asin) {
                 $client = new HttpBrowser();
+                
+                $userAgents = [
+                    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+                    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+                ];
+                $userAgent = $userAgents[array_rand($userAgents)];
+                $client->setServerParameter('HTTP_USER_AGENT', $userAgent);
+                $client->setServerParameter('HTTP_ACCEPT', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7');
+
                 $crawler = $client->request('GET', $this->url);
 
-                $this->asin = $crawler->filter('input[name="ASIN"]')->attr('value');
+                try {
+                    $this->asin = $crawler->filter('input[name="ASIN"]')->attr('value');
+                } catch (\Exception $e) {
+                    // Try to extract from content if input not found
+                    if (preg_match('/(?:dp|gp\/product|exec\/obidos\/ASIN)\/([A-Z0-9]{10})/', $client->getResponse()->getContent(), $matches)) {
+                        $this->asin = $matches[1];
+                    }
+                }
             }
         }
 
