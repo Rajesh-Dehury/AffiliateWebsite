@@ -12,7 +12,7 @@ class Home extends Component
     use WithPagination;
 
     public $search = '';
-    public $perPage = 30; // Default per page
+    public $perPage = 24; // Default per page (divisible by 2,3,4,6,8)
     public $sortField = 'updated_at'; // Default sort field
     public $sortDirection = 'desc'; // Default sort direction
     public $totalRecords = 0;
@@ -78,7 +78,7 @@ class Home extends Component
 
     public function loadMore()
     {
-        $this->totalRecords += $this->perPage;
+        $this->totalRecords += 24;
     }
 
     public function clearFilters()
