@@ -27,29 +27,19 @@ class UrlGenerate extends Component
 
     public function mount()
     {
-        $this->amazon_partner_tag = env('AMAZON_PARTNER_TAG');
+        $this->amazon_partner_tag = config('services.amazon.partner_tag', env('AMAZON_PARTNER_TAG', 'codewithrd-21'));
     }
 
     public function updatedPrice()
     {
-        if (strpos($this->price, '₹ ') === false) {
-            $this->price = '₹ ' . $this->price;
-        }
         $this->generateWpPost();
     }
     public function updatedMrp()
     {
-        if (strpos($this->mrp, '₹ ') === false) {
-            $this->mrp = '₹ ' . $this->mrp;
-        }
-
         $this->generateWpPost();
     }
     public function updatedSavingPercent()
     {
-        if (strpos($this->saving_percent, '₹ ') === false) {
-            $this->saving_percent = '₹ ' . $this->saving_percent;
-        }
         $this->generateWpPost();
     }
 
@@ -65,7 +55,16 @@ class UrlGenerate extends Component
         parse_str($parsed_url['query'] ?? '', $query_params);
 
         $client = new HttpBrowser();
-        $crawler = $client->request('GET', $this->url);
+        
+        // Add User Agent to avoid basic blocks
+        $client->setServerParameter('HTTP_USER_AGENT', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36');
+        
+        try {
+            $crawler = $client->request('GET', $this->url);
+        } catch (\Exception $e) {
+            session()->flash('error', 'Could not access Amazon page.');
+            return;
+        }
 
         // Check for 'pd_rd_i' parameter in the query string
         if (isset($query_params['pd_rd_i'])) {
@@ -73,7 +72,7 @@ class UrlGenerate extends Component
             $this->asin = $query_params['pd_rd_i'];
         } else {
             // If not, look for the ASIN in the URL path
-            $path_segments = explode('/', $parsed_url['path']);
+            $path_segments = explode('/', $parsed_url['path'] ?? '');
 
             foreach ($path_segments as $segment) {
                 // Look for a segment that matches the ASIN pattern
@@ -85,81 +84,74 @@ class UrlGenerate extends Component
 
             // If ASIN is not found in the URL, try to scrape it from the page
             if (!$this->asin) {
-                $this->asin = $crawler->filter('input[name="ASIN"]')->attr('value');
+                try {
+                    $this->asin = $crawler->filter('input[name="ASIN"]')->attr('value');
+                } catch (\Exception $e) {}
             }
         }
 
+        if (!$this->asin) {
+             session()->flash('error', 'Could not find ASIN in URL.');
+             return;
+        }
+
         // Construct a new Amazon URL with the affiliate tag
-        // $this->new_url = "https://www.amazon.in/dp/{$this->asin}?tag=codewithrd-21&linkCode=ogi&th=1&psc=1";
-        $this->new_url = "https://www.amazon.in/dp/{$this->asin}?psc=1&tag=codewithrd-21";
+        $this->new_url = "https://www.amazon.in/dp/{$this->asin}?tag={$this->amazon_partner_tag}";
 
         // Scrape the product title
         try {
             $product_title = $crawler->filter('#productTitle')->text();
             $this->product_title = trim($product_title);
-        } catch (\Exception $e) {
-        }
+        } catch (\Exception $e) {}
 
         // Scrape the price from the page
         try {
-            // Try to get the price from the '.a-price-whole' and '.a-price-decimal' if they exist
-            $whole_price = $crawler->filter('.a-price-whole')->text();
-            $decimal_price = $crawler->filter('.a-price-decimal')->text();
-            $this->price = trim($whole_price) . (empty($decimal_price) ? '' : '.' . trim($decimal_price));
-        } catch (\Exception $e) {
-            // Handle or log the exception if needed
-            // $this->price = 'Price not found';
-        }
+            $this->price = $crawler->filter('.a-price-whole')->first()->text();
+            $this->price = preg_replace('/[^0-9]/', '', $this->price);
+        } catch (\Exception $e) {}
 
         try {
-            // Extract the MRP from the span with class 'a-offscreen' within 'a-price a-text-price'
-            $this->mrp = $crawler->filter('.a-price.a-text-price .a-offscreen')->first()->text();
-        } catch (\Exception $e) {
-            // Handle or log the exception if needed
-            // $this->mrp = 'MRP not found';
-        }
+            $mrp_text = $crawler->filter('.a-price.a-text-price .a-offscreen')->first()->text();
+            $this->mrp = preg_replace('/[^0-9]/', '', $mrp_text);
+        } catch (\Exception $e) {}
 
         try {
-            // Get the saving percentage from '.savingsPercentage' if it exists
-            $this->saving_percent = $crawler->filter('.savingsPercentage')->text();
-        } catch (\Exception $e) {
-            // Handle or log the exception if needed
-            // $this->saving_percent = 'Saving percentage not found';
-        }
+            $this->saving_percent = $crawler->filter('.savingsPercentage')->first()->text();
+            $this->saving_percent = preg_replace('/[^0-9]/', '', $this->saving_percent);
+        } catch (\Exception $e) {}
 
-        // Construct the WordPress post content
+        // Construct the post content
         $this->generateWpPost();
     }
 
     public function generateWpPost()
     {
-        $this->wp_post = "$this->product_title";
-        if ($this->mrp != "") {
-            $this->wp_post .= "\r\n \r\n";
-            $this->wp_post .= "MRP: ~{$this->mrp}~/- ⬇️ Lowest Price";
-        }
-        if ($this->price != "") {
-            $this->wp_post .= "\r\n \r\n";
-            $this->wp_post .= "DEAL: *{$this->price}/- ";
-        }
-        if ($this->saving_percent != "") {
-            $this->wp_post .= "({$this->saving_percent})* 🕛";
-        }
-        $this->wp_post .= "\r\n \r\n";
-        if ($this->new_url != "") {
-            $this->wp_post .= "LINK : {$this->new_url}";
-        }
+        $mrp = $this->mrp ? '₹' . $this->mrp : '';
+        $price = $this->price ? '₹' . $this->price : '';
+        $saving = $this->saving_percent ? $this->saving_percent . '% Off' : '';
+
+        $this->wp_post = "[{$saving}] {$this->product_title}\n\nMrp: {$mrp} | DEAL: {$price}\n\nLINK: {$this->new_url}";
     }
 
     public function sendTelegram()
     {
-        $chatId = '-1002191566525';
+        $chatId = config('services.telegram.chat_id', '-1002191566525');
         if (is_null($this->wp_post)) {
             session()->flash('error', "No message Generated");
             return;
         }
-        $message = $this->wp_post;
-        app('App\Http\Controllers\TelegramBotController')->sendMessageToGroup($chatId, $message);
+        app('App\Http\Controllers\TelegramBotController')->sendMessageToGroup($chatId, $this->wp_post);
+    }
+    
+    public function sendWhatsapp()
+    {
+        if (is_null($this->wp_post)) {
+            session()->flash('error', "No message Generated");
+            return;
+        }
+        
+        $encodedMessage = urlencode($this->wp_post);
+        $this->dispatch('open-link', url: "https://api.whatsapp.com/send?text={$encodedMessage}");
     }
 
     public function postToFacebookPage()

@@ -1,135 +1,76 @@
-<div class="bg-white m-3 p-3 rounded-lg">
-    <div class="overflow-auto">
-        <div class="flex flex-col">
-            <div class="p-2" x-data="{
-                copiedField: null,
-                copyToClipboard(id) { 
-                    const text = document.getElementById(id).value;
-                    navigator.clipboard.writeText(text).then(() => { 
-                        this.copiedField = id; 
-                        setTimeout(() => { this.copiedField = null; }, 2000); 
-                    }); 
-                }
-            }">
-                <form class="grid grid-cols-8 gap-2 w-full mb-3" wire:submit.prevent="scrape">
-                    <div class="col-span-8">
-                        <div class="flex justify-between">
-                            <label for="url" class="text-gray-700 font-medium mb-1">Enter product URL</label>
-                            <span wire:click="resetT" wire:loading.class="animate-spin" class="cursor-pointer">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-                    <input type="text" wire:model="url" wire:loading.attr="disabled" placeholder="Enter product URL" class="col-span-6 md:col-span-7 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    <button wire:loading.attr="disabled" type="submit" class="col-span-2 md:col-span-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
-                        <span wire:loading.remove>Generate</span>
-                        <span wire:loading>Loading...</span>
-                    </button>
-                </form>
-                @error('url')
-                <p class="text-red-500">{{$message}}</p>
-                @enderror
-                <div class="grid grid-cols-8 gap-2 w-full mb-3">
-                    <label for="social_posts" class="col-span-8 text-gray-700 font-medium pb-2">Social Post</label>
-                    <button wire:click="sendTelegram" class="col-span-2 md:col-span-1 text-white bg-cyan-400 hover:bg-cyan-500 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
-                        <span wire:loading wire:target="sendTelegram">Loading..</span>
-                        <span wire:loading.class="hidden" wire:target="sendTelegram" class="inline-flex items-center">
-                            Telegram
-                        </span>
-                    </button>
-                    <button wire:click="postToFacebookPage" class="col-span-2 md:col-span-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
-                        <span wire:loading wire:target="postToFacebookPage">Loading..</span>
-                        <span wire:loading.class="hidden" wire:target="postToFacebookPage" class="inline-flex items-center">
-                            Facebook
-                        </span>
-                    </button>
-                    <button
-                        wire:loading.attr="disabled"
-                        wire:loading.class="opacity-50"
-                        wire:click="savePost"
-                        type="button"
-                        class="cursor-pointer col-span-2 md:col-span-1 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
-                        <span wire:loading.remove wire:target="savePost">Website</span>
-                        <span wire:loading="savePost" wire:target="savePost">Loading...</span>
+<div class="bg-white m-3 p-6 rounded-xl shadow-sm border border-gray-100" 
+     x-data="{
+        copiedField: null,
+        copyToClipboard(id) { 
+            const text = document.getElementById(id).value || document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(() => { 
+                this.copiedField = id; 
+                setTimeout(() => { this.copiedField = null; }, 2000); 
+            }); 
+        }
+    }"
+    x-on:open-link.window="window.open($event.detail.url, '_blank')"
+>
+    <div class="flex flex-col gap-6">
+        <!-- Input Section -->
+        <div>
+            <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                🔗 URL Converter & Quick Post
+            </h2>
+            <form wire:submit.prevent="scrape" class="flex gap-2">
+                <input type="text" wire:model="url" placeholder="Paste Amazon Product URL here..." 
+                       class="flex-1 bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3">
+                <button type="submit" wire:loading.attr="disabled" 
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-lg text-sm transition flex items-center gap-2 disabled:opacity-50">
+                    <span wire:loading.remove wire:target="scrape">🚀 Convert</span>
+                    <span wire:loading wire:target="scrape">Scraping...</span>
+                </button>
+                <button type="button" wire:click="resetT" class="p-3 text-gray-400 hover:text-gray-600 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+                    </svg>
+                </button>
+            </form>
+            @error('url') <p class="mt-2 text-xs text-red-500 font-medium">{{$message}}</p> @enderror
+        </div>
+
+        @if($wp_post)
+        <div class="animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <!-- Preview & Copy Area -->
+            <div class="space-y-4 max-w-2xl mx-auto">
+                <div class="flex justify-between items-center">
+                    <label class="text-sm font-bold text-gray-500 uppercase tracking-wider">Generated Deal Post</label>
+                    <button @click="copyToClipboard('wp_post')" 
+                            class="text-xs font-bold px-3 py-1.5 rounded-md transition border"
+                            :class="copiedField === 'wp_post' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-white text-blue-600 border-blue-200 hover:bg-blue-50'">
+                        <span x-show="copiedField !== 'wp_post'">📋 Copy Content</span>
+                        <span x-show="copiedField === 'wp_post'">✅ Copied!</span>
                     </button>
                 </div>
-                <div class="grid grid-cols-12 gap-2 w-full mb-3">
-                    <div class="md:col-span-4 col-span-12">
-                        <label for="price" class="text-gray-700 font-medium pb-2 block">Price</label>
-                        <input id="price" wire:model.live="price" type="text" class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    </div>
-                    <div class="md:col-span-4 col-span-12">
-                        <label for="mrp" class="text-gray-700 font-medium pb-2 block">MRP</label>
-                        <input id="mrp" wire:model.live="mrp" type="text" class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    </div>
-                    <div class="md:col-span-4 col-span-12">
-                        <label for="saving_percent" class="text-gray-700 font-medium pb-2 block">Discount(%)</label>
-                        <input id="saving_percent" wire:model.live="saving_percent" type="text" class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    </div>
-                </div>
-                @if($wp_post)
-                <label for="wp_post" class="text-gray-700 font-medium pb-2 block">WP Post</label>
-                <div class="grid grid-cols-8 gap-2 w-full mb-3">
-                    <textarea cols="10" id="wp_post" x-ref="wp_post" type="text" class="col-span-6 md:col-span-7 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" wire:model="wp_post" disabled readonly></textarea>
-                    <button @click="copyToClipboard('wp_post')" class="col-span-2 md:col-span-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
-                        <span x-show="copiedField !== 'wp_post'">Copy</span>
-                        <span x-show="copiedField === 'wp_post'" class="inline-flex items-center">
-                            <svg class="w-3 h-3 text-white me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
-                            </svg>
-                            Copied!
-                        </span>
+                
+                <div id="wp_post" class="w-full bg-gray-50 border border-dashed border-gray-300 text-gray-800 text-sm rounded-xl p-6 font-mono whitespace-pre-wrap leading-relaxed shadow-inner">{{ $wp_post }}</div>
+                
+                <div class="flex flex-wrap gap-3">
+                    <button wire:click="sendTelegram" 
+                            class="flex-1 bg-[#0088cc] hover:bg-[#0077b5] text-white font-bold py-4 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-sm">
+                        ✈️ Post to Telegram
+                    </button>
+                    <button wire:click="sendWhatsapp" 
+                            class="flex-1 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-4 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-sm">
+                        💬 Post to WhatsApp
                     </button>
                 </div>
-                @endif
-                @if($new_url)
-                <label for="new_url" class="text-gray-700 font-medium pb-2">My URL</label>
-                <div class="grid grid-cols-8 gap-2 w-full mb-3">
-                    <input id="new_url" x-ref="new_url" type="text" class="col-span-6 md:col-span-7 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" wire:model="new_url" disabled readonly>
-                    <button @click="copyToClipboard('new_url')" class="col-span-2 md:col-span-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
-                        <span x-show="copiedField !== 'new_url'">Copy</span>
-                        <span x-show="copiedField === 'new_url'" class="inline-flex items-center">
-                            <svg class="w-3 h-3 text-white me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
-                            </svg>
-                            Copied!
-                        </span>
+
+                <div class="pt-4 flex gap-3">
+                    <button wire:click="savePost" class="flex-1 bg-gray-800 hover:bg-black text-white font-bold py-3 rounded-lg text-xs transition uppercase tracking-wider">
+                        💾 Save to Website
+                    </button>
+                    <button wire:click="postToFacebookPage" class="flex-1 bg-[#1877F2] hover:bg-[#166fe5] text-white font-bold py-3 rounded-lg text-xs transition uppercase tracking-wider">
+                        📘 Facebook
                     </button>
                 </div>
-                @endif
-                @if($asin)
-                <label for="asin" class="text-gray-700 font-medium pb-2 block">Product ID</label>
-                <div class="grid grid-cols-8 gap-2 w-full mb-3">
-                    <input id="asin" x-ref="asin" type="text" class="col-span-6 md:col-span-7 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" wire:model="asin" disabled readonly>
-                    <button @click="copyToClipboard('asin')" class="col-span-2 md:col-span-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
-                        <span x-show="copiedField !== 'asin'">Copy</span>
-                        <span x-show="copiedField === 'asin'" class="inline-flex items-center">
-                            <svg class="w-3 h-3 text-white me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
-                            </svg>
-                            Copied!
-                        </span>
-                    </button>
-                </div>
-                @endif
-                @if($product_title)
-                <label for="product_title" class="text-gray-700 font-medium pb-2 block">Product Title</label>
-                <div class="grid grid-cols-8 gap-2 w-full mb-3">
-                    <input id="product_title" x-ref="product_title" type="text" class="col-span-6 md:col-span-7 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" wire:model="product_title" disabled readonly>
-                    <button @click="copyToClipboard('product_title')" class="col-span-2 md:col-span-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center">
-                        <span x-show="copiedField !== 'product_title'">Copy</span>
-                        <span x-show="copiedField === 'product_title'" class="inline-flex items-center">
-                            <svg class="w-3 h-3 text-white me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
-                            </svg>
-                            Copied!
-                        </span>
-                    </button>
-                </div>
-                @endif
             </div>
         </div>
+        @endif
     </div>
 </div>

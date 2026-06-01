@@ -31,4 +31,20 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'gemini' => [
+        'api_key'       => env('GEMINI_API_KEY'),
+        'model'         => env('GEMINI_MODEL', 'gemini-2.0-flash'),
+        'affiliate_tag' => env('AMAZON_PARTNER_TAG', 'codewithrd-21'),
+    ],
+
+    'telegram' => [
+        'chat_id' => env('TELEGRAM_CHAT_ID', '-1002191566525'),
+    ],
+
+    'amazon' => [
+        'access_key'  => env('AMAZON_ACCESS_KEY'),
+        'secret_key'  => env('AMAZON_SECRET_KEY'),
+        'partner_tag' => env('AMAZON_PARTNER_TAG'),
+    ],
+
 ];

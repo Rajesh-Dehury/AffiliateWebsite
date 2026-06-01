@@ -11,6 +11,7 @@ class Dashboard extends Component
     public $totalClicks;
     public $totalSubscribers;
     public $topDeals;
+    public $telegramMessage;
 
     public function mount()
     {
@@ -22,6 +23,27 @@ class Dashboard extends Component
         $this->topDeals = AmazonDeals::orderBy('views_count', 'desc')
                                      ->take(10)
                                      ->get();
+    }
+
+    public function postToTelegram()
+    {
+        $this->validate([
+            'telegramMessage' => 'required|min:5',
+        ]);
+
+        try {
+            \Telegram\Bot\Laravel\Facades\Telegram::sendMessage([
+                'chat_id' => config('services.telegram.chat_id'),
+                'text' => $this->telegramMessage,
+                'parse_mode' => 'HTML',
+            ]);
+
+            $this->telegramMessage = '';
+            session()->flash('success', 'Message posted to Telegram successfully!');
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Telegram post error: ' . $e->getMessage());
+            session()->flash('error', 'Failed to post to Telegram: ' . $e->getMessage());
+        }
     }
 
     public function render()

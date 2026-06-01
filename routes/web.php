@@ -59,6 +59,8 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/{id}/post', AdminPostDetails::class)->name('admin.post');
     Route::get('admin/settings', SettingUpdate::class)->name('admin.settings');
     Route::get('admin/subscriptions', \App\Livewire\Admin\Subscriptions::class)->name('admin.subscriptions');
+    Route::get('admin/deal-finder', \App\Livewire\Admin\DealFinder::class)->name('admin.deal-finder');
+    Route::get('admin/deals-magnet-scraper', \App\Livewire\Admin\DealsMagnetScraper::class)->name('admin.deals-magnet-scraper');
     Route::get('admin/logout', function () {
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
@@ -66,7 +68,7 @@ Route::middleware(['auth:admin'])->group(function () {
 });
 
 
-Route::post('/{token}/webhook', [TelegramBotController::class, 'handleWebhook']);
+Route::post('/{token}/webhook', [TelegramBotController::class, 'handleWebhook'])->name('telegram.webhook');
 Route::get('/set-webhook', [TelegramBotController::class, 'setWebhook']);
 
 Route::get('/send-message', function () {

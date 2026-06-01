@@ -1,5 +1,10 @@
 <footer class="bg-white border-t border-slate-100">
     <div class="container px-6 py-12 mx-auto">
+        <!-- Deal Finder Section -->
+        <div class="mb-12">
+            <livewire:deal-finder-public />
+        </div>
+
         <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
             <!-- Brand & Tagline -->
             <div class="space-y-4">
