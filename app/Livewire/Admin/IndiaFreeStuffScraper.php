@@ -3,19 +3,14 @@
 namespace App\Livewire\Admin;
 
 use Livewire\Component;
-use App\Services\DealsMagnetScraperService;
+use App\Services\IndiaFreeStuffScraperService;
 use App\Models\AmazonDeals;
 use Illuminate\Support\Str;
 
-class DealsMagnetScraper extends Component
+class IndiaFreeStuffScraper extends Component
 {
     public $scrapedDeals = [];
     public $isScraping = false;
-
-    public function mount()
-    {
-        // $this->scrape();
-    }
 
     public function scrape()
     {
@@ -23,7 +18,7 @@ class DealsMagnetScraper extends Component
         $this->scrapedDeals = [];
 
         try {
-            $scraper = new DealsMagnetScraperService(new \App\Services\AmazonApiService());
+            $scraper = new IndiaFreeStuffScraperService(new \App\Services\AmazonApiService());
             $this->scrapedDeals = $scraper->scrape(20);
         } catch (\Exception $e) {
             session()->flash('error', 'Scraping failed: ' . $e->getMessage());
@@ -35,17 +30,16 @@ class DealsMagnetScraper extends Component
     public function getPostText($index): string
     {
         if (!isset($this->scrapedDeals[$index])) return '';
-        
+
         $deal = $this->scrapedDeals[$index];
         $mrp = '₹' . number_format($deal['mrp'], 0, '.', ',');
         $price = '₹' . number_format($deal['offer_price'], 0, '.', ',');
         $discount = $deal['discount'] . '% Off';
         $asin = $deal['asin'] ?? '';
-        
-        // Use direct link with tag if ASIN exists, otherwise use source
+
         $tag = config('services.amazon.partner_tag', 'codewithrd-21');
-        $link = $asin 
-            ? "https://www.amazon.in/dp/{$asin}?tag={$tag}" 
+        $link = $asin
+            ? "https://www.amazon.in/dp/{$asin}?tag={$tag}"
             : $deal['deal_url'];
 
         return "[{$discount}] {$deal['title']}\n\nMrp: {$mrp} | DEAL: {$price}\n\nLINK: {$link}";
@@ -56,7 +50,7 @@ class DealsMagnetScraper extends Component
         if (!isset($this->scrapedDeals[$index])) return;
 
         $deal = $this->scrapedDeals[$index];
-        
+
         if (empty($deal['asin'])) {
             session()->flash('error', 'Cannot save to website: ASIN not found.');
             return;
@@ -69,7 +63,7 @@ class DealsMagnetScraper extends Component
 
         $tag = config('services.amazon.partner_tag', 'codewithrd-21');
         $directLink = "https://www.amazon.in/dp/{$deal['asin']}?tag={$tag}";
-        
+
         $slug = Str::slug($deal['title']);
         $count = AmazonDeals::where('slug', 'LIKE', "{$slug}%")->count();
         $finalSlug = $count ? "{$slug}-{$count}" : $slug;
@@ -140,7 +134,7 @@ class DealsMagnetScraper extends Component
 
     public function render()
     {
-        return view('livewire.admin.deals-magnet-scraper')
+        return view('livewire.admin.india-free-stuff-scraper')
             ->layout('components.admin-layout');
     }
 }

@@ -61,6 +61,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/subscriptions', \App\Livewire\Admin\Subscriptions::class)->name('admin.subscriptions');
     Route::get('admin/deal-finder', \App\Livewire\Admin\DealFinder::class)->name('admin.deal-finder');
     Route::get('admin/deals-magnet-scraper', \App\Livewire\Admin\DealsMagnetScraper::class)->name('admin.deals-magnet-scraper');
+    Route::get('admin/india-free-stuff-scraper', \App\Livewire\Admin\IndiaFreeStuffScraper::class)->name('admin.india-free-stuff-scraper');
     Route::get('admin/logout', function () {
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');

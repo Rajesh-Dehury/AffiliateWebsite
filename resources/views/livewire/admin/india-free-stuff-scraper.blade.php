@@ -14,7 +14,7 @@
     <div class="flex flex-col gap-6">
         <div class="flex flex-wrap justify-between items-center gap-4">
             <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
-                🧲 DealsMagnet Scraper
+                🇮🇳 IndiaFreeStuff Scraper
             </h2>
             <div class="flex flex-wrap gap-3">
                 <button wire:click="scrape" wire:loading.attr="disabled"
@@ -95,15 +95,15 @@
 
                             <div class="flex flex-wrap gap-2 mt-auto">
                                 <button wire:click="postToTelegram({{ $index }})" 
-                                        class="bg-[#0088cc] hover:bg-[#0077b5] text-white font-bold px-4 py-2.5 rounded-lg text-xs transition flex items-center gap-2">
+                                        class="bg-[#0088cc] hover:bg-[#0077b5] text-white font-bold px-4 py-2.5 rounded-lg text-sm transition flex items-center gap-2">
                                     ✈️ Telegram
                                 </button>
                                 <button wire:click="postToWhatsapp({{ $index }})" 
-                                        class="bg-[#25D366] hover:bg-[#128C7E] text-white font-bold px-4 py-2.5 rounded-lg text-xs transition flex items-center gap-2">
+                                        class="bg-[#25D366] hover:bg-[#128C7E] text-white font-bold px-4 py-2.5 rounded-lg text-sm transition flex items-center gap-2">
                                     💬 WhatsApp
                                 </button>
                                 <button wire:click="postToWebsite({{ $index }})" 
-                                        class="bg-gray-800 hover:bg-black text-white font-bold px-4 py-2.5 rounded-lg text-xs transition flex items-center gap-2">
+                                        class="bg-gray-800 hover:bg-black text-white font-bold px-4 py-2.5 rounded-lg text-sm transition flex items-center gap-2">
                                     💾 Post to Web
                                 </button>
                                  <a href="{{ $deal['our_link'] }}" target="_blank" 
